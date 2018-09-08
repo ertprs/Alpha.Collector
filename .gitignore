@@ -1,0 +1,8 @@
+# compiled files
+obj
+bin
+PublishProfiles
+[Ll]og
+# user files
+*.user
+*.suo

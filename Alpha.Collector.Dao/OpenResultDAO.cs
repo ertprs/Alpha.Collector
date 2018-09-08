@@ -1,4 +1,4 @@
-﻿using Alpha.Collector.Model.DataBase;
+﻿using Alpha.Collector.Model;
 using System.Collections.Generic;
 using System.Linq;
 

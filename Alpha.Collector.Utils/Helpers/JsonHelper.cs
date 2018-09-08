@@ -3,7 +3,7 @@ using Newtonsoft.Json.Converters;
 using System;
 using System.Data;
 
-namespace Alpha.Collector.Tools.Helpers
+namespace Alpha.Collector.Utils
 {
     /// <summary>
     /// Json帮助类

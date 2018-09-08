@@ -1,7 +1,7 @@
-﻿using Alpha.Collector.Model.DataBase;
+﻿using Alpha.Collector.Model;
 using System.Collections.Generic;
 
-namespace Alpha.Collector.CQSSC
+namespace Alpha.Collector.Core
 {
     /// <summary>
     /// 重庆时时彩采集器接口

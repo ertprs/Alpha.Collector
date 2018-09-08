@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
 using System.Text;
 
-namespace Alpha.Collector.Tools.Helpers
+namespace Alpha.Collector.Utils
 {
     /// <summary>
     /// HTTP请求帮助类

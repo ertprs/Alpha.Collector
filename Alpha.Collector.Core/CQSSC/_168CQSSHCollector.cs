@@ -1,18 +1,15 @@
-﻿using Alpha.Collector.Model._168;
-using Alpha.Collector.Model.CQSSC;
-using Alpha.Collector.Model.DataBase;
-using Alpha.Collector.Model.Enums;
-using Alpha.Collector.Tools.Helpers;
+﻿using Alpha.Collector.Model;
+using Alpha.Collector.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Alpha.Collector.CQSSC
+namespace Alpha.Collector.Core
 {
     /// <summary>
     /// 168开奖网抓取重庆时时彩
     /// </summary>
-    public class _168CQSSHCollector : ICQSSCCollector
+    internal class _168CQSSHCollector : ICQSSCCollector
     {
         /// <summary>
         /// 采集地址

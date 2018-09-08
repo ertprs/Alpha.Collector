@@ -42,10 +42,11 @@
   <ItemGroup>
     <Compile Include="CQSSC\_168CQSSCData.cs" />
     <Compile Include="DataBase\OpenResult.cs" />
+    <Compile Include="DSResponse\KCResponse.cs" />
     <Compile Include="Enums\DataSourceEnum.cs" />
     <Compile Include="Enums\LotteryCodeEnum.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="_168\_168Response.cs" />
+    <Compile Include="DSResponse\_168Response.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Alpha.Collector.Utils\Alpha.Collector.Utils.csproj">

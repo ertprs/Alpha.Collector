@@ -1,4 +1,4 @@
-﻿namespace Alpha.Collector.Model.Enums
+﻿namespace Alpha.Collector.Model
 {
     /// <summary>
     /// 彩种代号

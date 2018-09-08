@@ -1,4 +1,4 @@
-﻿namespace Alpha.Collector.Model.CQSSC
+﻿namespace Alpha.Collector.Model
 {
     /// <summary>
     /// 168开奖网CQSSC开奖数据

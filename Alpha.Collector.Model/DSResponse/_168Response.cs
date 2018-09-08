@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Alpha.Collector.Model._168
+namespace Alpha.Collector.Model
 {
     /// <summary>
     /// 168开奖网返回结果

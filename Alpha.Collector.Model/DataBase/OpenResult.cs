@@ -1,7 +1,6 @@
-﻿using Alpha.Collector.Utils.Attributes;
-using System;
+﻿using System;
 
-namespace Alpha.Collector.Model.DataBase
+namespace Alpha.Collector.Model
 {
     /// <summary>
     /// 彩票开奖结果

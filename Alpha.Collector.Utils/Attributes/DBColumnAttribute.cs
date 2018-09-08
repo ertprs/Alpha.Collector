@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace Alpha.Collector.Utils.Attributes
+namespace Alpha.Collector.Utils
 {
     /// <summary>
     /// Uses the Name value of the <see cref="ColumnAttribute"/> specified to determine

@@ -1,6 +1,6 @@
-﻿using Alpha.Collector.CQSSC;
+﻿using Alpha.Collector.Core;
 using Alpha.Collector.Dao;
-using Alpha.Collector.Model.DataBase;
+using Alpha.Collector.Model;
 using log4net;
 using System;
 using System.Collections.Generic;
@@ -16,10 +16,11 @@ namespace Alpha.Collector.Test
         private static ILog log = LogManager.GetLogger(typeof(Program));
         static void Main(string[] args)
         {
-            ICQSSCCollector collector = new _168CQSSHCollector();
-            List<OpenResult> resultList = collector.Run();
+            //List<OpenResult> resultList = CQSSCCollectorManager.GetInstance(DataSourceEnum.CJW).Run();
+            List<OpenResult> resultList = CQSSCCollectorManager.Run(4);
             int result = OpenResultDAO.Insert(resultList);
             log.Info("抓取到重庆时时彩开奖结果：" + result);
+
             //var o = MySqlHelper.GetList<OpenResult>("select * from open_result");
         }
     }

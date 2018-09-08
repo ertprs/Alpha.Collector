@@ -61,6 +61,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Alpha.Collector.Core\Alpha.Collector.Core.csproj">
+      <Project>{4ef37479-0a18-4ff6-b25e-454637b1683b}</Project>
+      <Name>Alpha.Collector.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Alpha.Collector.Dao\Alpha.Collector.Dao.csproj">
       <Project>{7584c433-90c6-4182-839e-d3242e67d538}</Project>
       <Name>Alpha.Collector.Dao</Name>
@@ -72,10 +76,6 @@
     <ProjectReference Include="..\Alpha.Collector.Utils\Alpha.Collector.Utils.csproj">
       <Project>{98366994-a207-42fb-bb29-53f88882e654}</Project>
       <Name>Alpha.Collector.Utils</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Alpha.Collector\Alpha.Collector.Core.csproj">
-      <Project>{4ef37479-0a18-4ff6-b25e-454637b1683b}</Project>
-      <Name>Alpha.Collector.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

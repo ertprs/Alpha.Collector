@@ -1,5 +1,8 @@
 ﻿using Alpha.Collector.Utils;
 using Alpha.Collector.Model;
+using System.Collections.Generic;
+using System;
+using System.Linq;
 
 namespace Alpha.Collector.Core
 {
@@ -23,60 +26,48 @@ namespace Alpha.Collector.Core
         /// 采集开奖结果
         /// </summary>
         /// <returns></returns>
-        public KCResponse Pick()
+        public List<OpenResult> Pick()
         {
             HttpRequestParam param = this.GetParam(this._lotteryCode);
-
-            if (string.IsNullOrEmpty(param.Url))
-            {
-                return new KCResponse
-                {
-                    Code = -1,
-                    StrCode = "请求地址不能为空"
-                };
-            }
-
-            if (string.IsNullOrEmpty(param.PostData))
-            {
-                return new KCResponse
-                {
-                    Code = -1,
-                    StrCode = "请求参数不能为空"
-                };
-            }
 
             string errorInfo = string.Empty;
             string html = HttpHelper.GetHtml(param, ref errorInfo);
             if (!string.IsNullOrEmpty(errorInfo))
             {
-                return new KCResponse
-                {
-                    Code = -1,
-                    StrCode = errorInfo
-                };
+                throw new Exception($"从快彩在线采集{this._lotteryCode}出错。错误信息：{errorInfo}，抓取地址：{param.Url}");
             }
 
             if (string.IsNullOrEmpty(html))
             {
-                return new KCResponse
-                {
-                    Code = -1,
-                    StrCode = "返回的html为空。Url：" + param.Url
-                };
+                throw new Exception($"从快彩在线采集{this._lotteryCode}出错。抓取地址：{param.Url}");
             }
 
             if (html.ToLower().Contains("robots"))
             {
-                return new KCResponse
-                {
-                    Code = -1,
-                    StrCode = "返回的html错误（被反爬虫截断请求）。HTML：" + html
-                };
+                throw new Exception($"从快彩在线采集{this._lotteryCode}出错。返回的html错误（被反爬虫截断请求）。HTML：{html}");
             }
 
-            KCResponse KCResponse = JsonHelper.JsonToEntity<KCResponse>(html);
+            KCResponse response = JsonHelper.JsonToEntity<KCResponse>(html);
+            if (response.Code < 1)
+            {
+                return new List<OpenResult>();
+            }
 
-            return KCResponse;
+            if (response.BackData == null || response.BackData.Count == 0)
+            {
+                return new List<OpenResult>();
+            }
+
+            return (from o in response.BackData
+                    select new OpenResult
+                    {
+                        create_time = DateTime.Now,
+                        open_time = DateTime.Parse(o.OpenTime),
+                        lottery_code = LotteryCodeEnum.CQSSC,
+                        issue_number = Convert.ToInt64(o.IssueNo),
+                        open_data = o.LotteryOpen,
+                        data_source = DataSourceEnum.KCZX
+                    }).OrderBy(o => o.issue_number).ToList();
         }
 
         /// <summary>

@@ -1,5 +1,4 @@
 ﻿using Alpha.Collector.Model;
-using Alpha.Collector.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,19 +22,10 @@ namespace Alpha.Collector.Core
         {
             try
             {
-                string json = HttpHelper.HttpGet(URL);
-                _168Response<_168CQSSCData> response = JsonHelper.JsonToEntity<_168Response<_168CQSSCData>>(json, null);
-                if (response.errorCode != 0)
-                {
-                    return new List<OpenResult>();
-                }
+                _168Picker<_168CQSSCData> picker = new _168Picker<_168CQSSCData>(URL, LotteryCodeEnum.CQSSC);
+                List<_168CQSSCData> dataList = picker.Pick();
 
-                if (response.result.data == null || response.result.data.Count == 0)
-                {
-                    return new List<OpenResult>();
-                }
-
-                return (from o in response.result.data
+                return (from o in dataList
                         select new OpenResult
                         {
                             create_time = DateTime.Now,
@@ -48,7 +38,17 @@ namespace Alpha.Collector.Core
             }
             catch (Exception ex)
             {
-                throw ex;
+                AppLog appLog = new AppLog
+                {
+                    create_time = DateTime.Now,
+                    log_type = "Error",
+                    lottery_code = LotteryCodeEnum.CQSSC,
+                    data_source = DataSourceEnum._168,
+                    log_message = ex.ToString()
+                };
+                AlphaLogManager.Error(appLog);
+
+                return new List<OpenResult>();
             }
         }
     }

@@ -1,7 +1,6 @@
 ﻿using Alpha.Collector.Model;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Alpha.Collector.Core
 {
@@ -25,31 +24,21 @@ namespace Alpha.Collector.Core
         {
             try
             {
-                KCResponse response = this._kcPicker.Pick();
-                if (response.Code < 1)
-                {
-                    return new List<OpenResult>();
-                }
-
-                if (response.BackData == null || response.BackData.Count == 0)
-                {
-                    return new List<OpenResult>();
-                }
-
-                return (from o in response.BackData
-                        select new OpenResult
-                        {
-                            create_time = DateTime.Now,
-                            open_time = DateTime.Parse(o.OpenTime),
-                            lottery_code = LotteryCodeEnum.CQSSC,
-                            issue_number = Convert.ToInt64(o.IssueNo),
-                            open_data = o.LotteryOpen,
-                            data_source = DataSourceEnum.KCZX
-                        }).OrderBy(o => o.issue_number).ToList();
+                return this._kcPicker.Pick();
             }
             catch (Exception ex)
             {
-                throw ex;
+                AppLog appLog = new AppLog
+                {
+                    create_time = DateTime.Now,
+                    log_type = "Error",
+                    lottery_code = LotteryCodeEnum.CQSSC,
+                    data_source = DataSourceEnum.KCZX,
+                    log_message = ex.ToString()
+                };
+                AlphaLogManager.Error(appLog);
+
+                return new List<OpenResult>();
             }
         }
     }

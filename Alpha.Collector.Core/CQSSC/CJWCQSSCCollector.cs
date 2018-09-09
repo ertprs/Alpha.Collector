@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Alpha.Collector.Model;
+using System;
 
 namespace Alpha.Collector.Core
 {
@@ -19,8 +20,25 @@ namespace Alpha.Collector.Core
         /// <returns></returns>
         List<OpenResult> ICQSSCCollector.Run()
         {
-            CJWPicker picker = new CJWPicker(LotteryCodeEnum.CQSSC, URL);
-            return picker.Pick();
+            try
+            {
+                CJWPicker picker = new CJWPicker(LotteryCodeEnum.CQSSC, URL);
+                return picker.Pick();
+            }
+            catch(Exception ex)
+            {
+                AppLog appLog = new AppLog
+                {
+                    create_time = DateTime.Now,
+                    log_type = "Error",
+                    lottery_code = LotteryCodeEnum.CQSSC,
+                    data_source = DataSourceEnum.CJW,
+                    log_message = ex.ToString()
+                };
+                AlphaLogManager.Error(appLog);
+
+                return new List<OpenResult>();
+            }
         }
     }
 }

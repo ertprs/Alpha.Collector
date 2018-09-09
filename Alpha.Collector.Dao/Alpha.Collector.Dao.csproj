@@ -56,8 +56,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConnectionFactory.cs" />
+    <Compile Include="DAL\AppLogDAO.cs" />
     <Compile Include="MysqlHelper.cs" />
-    <Compile Include="OpenResultDAO.cs" />
+    <Compile Include="DAL\OpenResultDAO.cs" />
     <Compile Include="PagerInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

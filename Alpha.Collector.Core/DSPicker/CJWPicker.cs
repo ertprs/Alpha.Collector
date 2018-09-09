@@ -33,60 +33,53 @@ namespace Alpha.Collector.Core
         /// <returns></returns>
         public List<OpenResult> Pick()
         {
-            try
+            HttpRequestParam param = new HttpRequestParam { Url = this._url };
+            string errorInfo = string.Empty;
+            string html = HttpHelper.GetHtml(param, ref errorInfo);
+            if (!string.IsNullOrEmpty(errorInfo))
             {
-                HttpRequestParam param = new HttpRequestParam { Url = this._url };
-                string errorInfo = string.Empty;
-                string html = HttpHelper.GetHtml(param, ref errorInfo);
-                if (!string.IsNullOrEmpty(errorInfo))
-                {
-                    throw new Exception($"从财经网采集{this._lotteryType}出错。错误信息：{errorInfo}，抓取地址：{this._url}");
-                }
-
-                Regex regex = new Regex(@"<table[^><]*class=""kjjg_table"">(?<html>[\S\s]*?)</table>", RegexOptions.IgnoreCase);
-                Match match = regex.Match(html);
-                if (!match.Success)
-                {
-                    throw new Exception($"从财经网采集{this._lotteryType}出错。抓取地址：{this._url}，源代码：{html}");
-                }
-
-                html = match.Groups["html"].Value;
-
-                regex = new Regex(@"<tr>\s*<td>(?<issueNo>[0-9]+)[^><]*</td>\s*<td>(?<time>[0-9-\s:]+)</td>(?<num>\s*<td>[\s\S]*?</td>\s*)</tr>", RegexOptions.IgnoreCase);
-                MatchCollection matches = regex.Matches(html);
-                if (matches.Count == 0)
-                {
-                    throw new Exception($"从财经网采集{this._lotteryType}出错。抓取地址：{this._url}，源代码：{html}");
-                }
-
-                List<OpenResult> resultList = new List<OpenResult>();
-                foreach (Match m in matches)
-                {
-                    OpenResult result = new OpenResult
-                    {
-                        create_time = DateTime.Now,
-                        lottery_code = this._lotteryType,
-                        data_source = DataSourceEnum.CJW
-                    };
-
-                    result.issue_number = Convert.ToInt64(m.Groups["issueNo"].Value);
-                    result.open_time = Convert.ToDateTime(m.Groups["time"].Value);
-                    result.open_data = this.GetOpenData(m.Groups["num"].Value);
-
-                    if (string.IsNullOrEmpty(result.open_data))
-                    {
-                        continue;
-                    }
-
-                    resultList.Add(result);
-                }
-
-                return resultList;
+                throw new Exception($"从财经网采集{this._lotteryType}出错。错误信息：{errorInfo}，抓取地址：{this._url}");
             }
-            catch (Exception ex)
+
+            Regex regex = new Regex(@"<table[^><]*class=""kjjg_table"">(?<html>[\S\s]*?)</table>", RegexOptions.IgnoreCase);
+            Match match = regex.Match(html);
+            if (!match.Success)
             {
-                throw ex;
+                throw new Exception($"从财经网采集{this._lotteryType}出错。抓取地址：{this._url}，源代码：{html}");
             }
+
+            html = match.Groups["html"].Value;
+
+            regex = new Regex(@"<tr>\s*<td>(?<issueNo>[0-9]+)[^><]*</td>\s*<td>(?<time>[0-9-\s:]+)</td>(?<num>\s*<td>[\s\S]*?</td>\s*)</tr>", RegexOptions.IgnoreCase);
+            MatchCollection matches = regex.Matches(html);
+            if (matches.Count == 0)
+            {
+                throw new Exception($"从财经网采集{this._lotteryType}出错。抓取地址：{this._url}，源代码：{html}");
+            }
+
+            List<OpenResult> resultList = new List<OpenResult>();
+            foreach (Match m in matches)
+            {
+                OpenResult result = new OpenResult
+                {
+                    create_time = DateTime.Now,
+                    lottery_code = this._lotteryType,
+                    data_source = DataSourceEnum.CJW
+                };
+
+                result.issue_number = Convert.ToInt64(m.Groups["issueNo"].Value);
+                result.open_time = Convert.ToDateTime(m.Groups["time"].Value);
+                result.open_data = this.GetOpenData(m.Groups["num"].Value);
+
+                if (string.IsNullOrEmpty(result.open_data))
+                {
+                    continue;
+                }
+
+                resultList.Add(result);
+            }
+
+            return resultList;
         }
 
         /// <summary>

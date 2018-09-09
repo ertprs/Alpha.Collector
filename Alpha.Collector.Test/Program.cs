@@ -16,8 +16,8 @@ namespace Alpha.Collector.Test
         private static ILog log = LogManager.GetLogger(typeof(Program));
         static void Main(string[] args)
         {
-            //List<OpenResult> resultList = CQSSCCollectorManager.GetInstance(DataSourceEnum.CJW).Run();
-            List<OpenResult> resultList = CQSSCCollectorManager.Run(4);
+            List<OpenResult> resultList = CQSSCCollectorManager.GetInstance(DataSourceEnum.KCZX).Run();
+            //List<OpenResult> resultList = CQSSCCollectorManager.Run(4);
             int result = OpenResultDAO.Insert(resultList);
             log.Info("抓取到重庆时时彩开奖结果：" + result);
 

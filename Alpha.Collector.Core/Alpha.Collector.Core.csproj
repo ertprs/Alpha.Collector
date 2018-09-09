@@ -30,11 +30,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="log4net">
+      <HintPath>..\Alpha.Collector.Libs\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Alpha.Collector.Libs\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -51,9 +55,18 @@
     <Compile Include="CQSSC\_168CQSSHCollector.cs" />
     <Compile Include="DSPicker\CJWPicker.cs" />
     <Compile Include="DSPicker\KCPicker.cs" />
+    <Compile Include="DSPicker\_168Picker.cs" />
+    <Compile Include="Log\DBLog.cs" />
+    <Compile Include="Log\FileLog.cs" />
+    <Compile Include="Log\IAlphaLog.cs" />
+    <Compile Include="Log\AlphaLogManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Alpha.Collector.Dao\Alpha.Collector.Dao.csproj">
+      <Project>{7584C433-90C6-4182-839E-D3242E67D538}</Project>
+      <Name>Alpha.Collector.Dao</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Alpha.Collector.Model\Alpha.Collector.Model.csproj">
       <Project>{5AAFB159-3DCE-4124-975A-7F4D62FC35C1}</Project>
       <Name>Alpha.Collector.Model</Name>

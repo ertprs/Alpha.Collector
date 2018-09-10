@@ -16,7 +16,7 @@ namespace Alpha.Collector.Dao
         {
             string sql = "insert into app_log (create_time, create_timestamp, log_type, lottery_code, data_source, log_message)"
                        + "values(@create_time, @create_timestamp, @log_type, @lottery_code, @data_source, @log_message)";
-            return MySqlHelper.Execute(sql);
+            return MySqlHelper.Execute(sql, appLog);
         }
     }
 }

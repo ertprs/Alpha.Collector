@@ -47,7 +47,7 @@ namespace Alpha.Collector.Core
                 throw new Exception($"从快彩在线采集{this._lotteryCode}出错。返回的html错误（被反爬虫截断请求）。HTML：{html}");
             }
 
-            KCResponse response = JsonHelper.JsonToEntity<KCResponse>(html);
+            KCResponse response = html.ToEntity<KCResponse>();
             if (response.Code < 1)
             {
                 return new List<OpenResult>();
@@ -63,10 +63,10 @@ namespace Alpha.Collector.Core
                     {
                         create_time = DateTime.Now,
                         open_time = DateTime.Parse(o.OpenTime),
-                        lottery_code = LotteryCodeEnum.CQSSC,
+                        lottery_code = LotteryType.CQSSC,
                         issue_number = Convert.ToInt64(o.IssueNo),
                         open_data = o.LotteryOpen,
-                        data_source = DataSourceEnum.KCZX
+                        data_source = DataSource.KCZX
                     }).OrderBy(o => o.issue_number).ToList();
         }
 

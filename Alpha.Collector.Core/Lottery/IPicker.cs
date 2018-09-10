@@ -4,9 +4,9 @@ using System.Collections.Generic;
 namespace Alpha.Collector.Core
 {
     /// <summary>
-    /// 重庆时时彩采集器接口
+    /// 采集器接口
     /// </summary>
-    public interface ICQSSCCollector
+    public interface IPicker
     {
         /// <summary>
         /// 执行

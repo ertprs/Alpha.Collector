@@ -32,7 +32,7 @@ namespace Alpha.Collector.Core
         public List<T> Pick()
         {
             string json = HttpHelper.HttpGet(this._url);
-            _168Response<T> response = JsonHelper.JsonToEntity<_168Response<T>>(json, null);
+            _168Response<T> response = json.ToEntity<_168Response<T>>();
             if (response.errorCode != 0)
             {
                 throw new Exception($"从168开奖网采集{this._lotteryCode}出错。错误代码：{response.errorCode}。抓取地址：{this._url}");

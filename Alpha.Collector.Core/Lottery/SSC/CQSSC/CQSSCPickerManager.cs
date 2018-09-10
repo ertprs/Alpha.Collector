@@ -10,24 +10,24 @@ namespace Alpha.Collector.Core
     /// <summary>
     /// 重庆时时彩采集器管理器
     /// </summary>
-    public static class CQSSCCollectorManager
+    public static class CQSSCPickerManager
     {
         /// <summary>
         /// 构造函数
         /// </summary>
         /// <param name="collector"></param>
-        public static ICQSSCCollector GetInstance(string dataSource)
+        public static IPicker GetInstance(string dataSource)
         {
             switch (dataSource)
             {
-                case DataSourceEnum._168:
-                    return (ICQSSCCollector)Activator.CreateInstance(typeof(_168CQSSHCollector));
-                case DataSourceEnum.KCZX:
-                    return (ICQSSCCollector)Activator.CreateInstance(typeof(KCCQSSCCollector));
-                case DataSourceEnum.CJW:
-                    return (ICQSSCCollector)Activator.CreateInstance(typeof(CJWCQSSCCollector));
+                case DataSource._168:
+                    return (IPicker)Activator.CreateInstance(typeof(_168CQSSCPicker));
+                case DataSource.KCZX:
+                    return (IPicker)Activator.CreateInstance(typeof(KCCQSSCPicker));
+                case DataSource.CJW:
+                    return (IPicker)Activator.CreateInstance(typeof(CJWCQSSCPicker));
                 default:
-                    return (ICQSSCCollector)Activator.CreateInstance(typeof(_168CQSSHCollector));
+                    return (IPicker)Activator.CreateInstance(typeof(_168CQSSCPicker));
             }
         }
 
@@ -37,7 +37,7 @@ namespace Alpha.Collector.Core
         /// <param name="threadCount">线程数量</param>
         public static List<OpenResult> Run(int threadCount)
         {
-            Type type = typeof(DataSourceEnum);
+            Type type = typeof(DataSource);
             List<FieldInfo> fieldInfo = type.GetFields().ToList();
 
             List<OpenResult> list = new List<OpenResult>();

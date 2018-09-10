@@ -15,7 +15,7 @@ namespace Alpha.Collector.Dao
         /// <summary>
         /// 数据库连接字符串
         /// </summary>
-        private static readonly string DBConnectionString = ConfigurationManager.ConnectionStrings["DBConnectString"].ToString();
+        private static readonly string DBConnectionString = ConfigurationManager.ConnectionStrings["MysqlConnection"].ToString();
 
         /// <summary>
         /// 执行sql

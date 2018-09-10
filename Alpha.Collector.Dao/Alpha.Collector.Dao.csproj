@@ -11,6 +11,7 @@
     <AssemblyName>Alpha.Collector.Dao</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -37,6 +38,13 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Alpha.Collector.Libs\MySql.Data.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Alpha.Collector.Libs\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="StackExchange.Redis">
+      <HintPath>..\Alpha.Collector.Libs\StackExchange.Redis.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -45,6 +53,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Drawing.Design" />
+    <Reference Include="System.IO.Compression" />
     <Reference Include="System.Management" />
     <Reference Include="System.Transactions" />
     <Reference Include="System.Xml.Linq" />
@@ -55,12 +64,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ConnectionFactory.cs" />
+    <Compile Include="Mysql\ConnectionFactory.cs" />
     <Compile Include="DAL\AppLogDAO.cs" />
-    <Compile Include="MysqlHelper.cs" />
+    <Compile Include="Mysql\MysqlHelper.cs" />
     <Compile Include="DAL\OpenResultDAO.cs" />
     <Compile Include="PagerInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Redis\Redis.cs" />
+    <Compile Include="Redis\RedisHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Alpha.Collector.Model\Alpha.Collector.Model.csproj">

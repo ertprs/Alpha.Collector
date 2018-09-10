@@ -3,7 +3,7 @@
     /// <summary>
     /// 数据源
     /// </summary>
-    public static class DataSourceEnum
+    public static class DataSource
     {
         /// <summary>
         /// 168开奖网

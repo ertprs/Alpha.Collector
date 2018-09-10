@@ -8,7 +8,7 @@ namespace Alpha.Collector.Core
     /// <summary>
     /// 168开奖网抓取重庆时时彩
     /// </summary>
-    internal class _168CQSSHCollector : ICQSSCCollector
+    internal class _168CQSSCPicker : IPicker
     {
         /// <summary>
         /// 采集地址
@@ -18,11 +18,11 @@ namespace Alpha.Collector.Core
         /// <summary>
         /// 执行
         /// </summary>
-        List<OpenResult> ICQSSCCollector.Run()
+        List<OpenResult> IPicker.Run()
         {
             try
             {
-                _168Picker<_168CQSSCData> picker = new _168Picker<_168CQSSCData>(URL, LotteryCodeEnum.CQSSC);
+                _168Picker<_168CQSSCData> picker = new _168Picker<_168CQSSCData>(URL, LotteryType.CQSSC);
                 List<_168CQSSCData> dataList = picker.Pick();
 
                 return (from o in dataList
@@ -30,10 +30,10 @@ namespace Alpha.Collector.Core
                         {
                             create_time = DateTime.Now,
                             open_time = DateTime.Parse(o.preDrawTime),
-                            lottery_code = LotteryCodeEnum.CQSSC,
+                            lottery_code = LotteryType.CQSSC,
                             issue_number = Convert.ToInt64(o.preDrawIssue),
                             open_data = o.preDrawCode,
-                            data_source = DataSourceEnum._168
+                            data_source = DataSource._168
                         }).OrderBy(o => o.issue_number).ToList();
             }
             catch (Exception ex)
@@ -42,8 +42,8 @@ namespace Alpha.Collector.Core
                 {
                     create_time = DateTime.Now,
                     log_type = "Error",
-                    lottery_code = LotteryCodeEnum.CQSSC,
-                    data_source = DataSourceEnum._168,
+                    lottery_code = LotteryType.CQSSC,
+                    data_source = DataSource._168,
                     log_message = ex.ToString()
                 };
                 AlphaLogManager.Error(appLog);

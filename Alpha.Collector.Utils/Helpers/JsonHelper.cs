@@ -16,7 +16,7 @@ namespace Alpha.Collector.Utils
         /// <typeparam name="T"></typeparam>
         /// <param name="value"></param>
         /// <returns></returns>
-        public static T JsonToEntity<T>(string value, params JsonConverter[] converters)
+        public static T ToEntity<T>(this string value, params JsonConverter[] converters)
         {
             if (string.IsNullOrEmpty(value))
             {
@@ -42,6 +42,26 @@ namespace Alpha.Collector.Utils
                 }
                 return JsonConvert.DeserializeObject<T>(value);
             }
+        }
+
+        /// <summary>
+        /// 转换为json
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <param name="ignoreNull"></param>
+        /// <returns></returns>
+        public static string ToJson(this object obj, bool ignoreNull = false)
+        {
+            if (obj == null)
+            {
+                return null;
+            }
+
+            return JsonConvert.SerializeObject(obj, Formatting.None, new JsonSerializerSettings
+            {
+                DateFormatString = "yyyy-MM-dd HH:mm:ss",
+                NullValueHandling = (ignoreNull ? NullValueHandling.Ignore : NullValueHandling.Include)
+            });
         }
     }
 }

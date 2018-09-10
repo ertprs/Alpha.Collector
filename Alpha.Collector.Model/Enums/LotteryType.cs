@@ -3,7 +3,7 @@
     /// <summary>
     /// 彩种代号
     /// </summary>
-    public static class LotteryCodeEnum
+    public static class LotteryType
     {
         #region 快3
 

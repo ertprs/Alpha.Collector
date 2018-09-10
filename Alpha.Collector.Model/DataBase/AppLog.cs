@@ -1,5 +1,4 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 
 namespace Alpha.Collector.Model
 {
@@ -9,9 +8,9 @@ namespace Alpha.Collector.Model
     public class AppLog
     {
         /// <summary>
-        /// 自增ID
+        /// ID
         /// </summary>
-        public long id { get; set; }
+        public string id { get; set; }
 
         /// <summary>
         /// 创建时间
@@ -51,12 +50,12 @@ namespace Alpha.Collector.Model
         public string data_source { get; set; }
 
         /// <summary>
-        /// 重写
+        /// 重写ToString
         /// </summary>
         /// <returns></returns>
         public override string ToString()
         {
-            return JsonConvert.SerializeObject(this);
+            return $"数据源：{this.data_source ?? ""}，彩种：{this.lottery_code}，时间：{this.create_time}，消息：{this.log_message}";
         }
     }
 }

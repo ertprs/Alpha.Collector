@@ -52,6 +52,21 @@
         /// </summary>
         public const string NMGK3 = "NMGK3";
 
+        /// <summary>
+        /// 甘肃快3
+        /// </summary>
+        public const string GSK3 = "GSK3";
+
+        /// <summary>
+        /// 上海快3
+        /// </summary>
+        public const string SHK3 = "SHK3";
+
+        /// <summary>
+        /// 贵州快3
+        /// </summary>
+        public const string GZK3 = "GZK3";
+
         #endregion 快3
 
 
@@ -157,6 +172,11 @@
         /// </summary>
         public const string NMG11X5 = "NMG11X5";
 
+        /// <summary>
+        /// 山东11选5
+        /// </summary>
+        public const string SD11X5 = "SD11X5";
+
         #endregion 11选5
 
 
@@ -191,6 +211,16 @@
         /// 香港六合彩
         /// </summary>
         public const string XGLHC = "XGLHC";
+
+        /// <summary>
+        /// 福彩3D
+        /// </summary>
+        public const string FC3D = "FC3D";
+
+        /// <summary>
+        /// 体彩排列3
+        /// </summary>
+        public const string PL3 = "PL3";
 
         #endregion 六合彩
     }

@@ -4,9 +4,9 @@ using System;
 namespace Alpha.Collector.Core
 {
     /// <summary>
-    /// 重庆时时彩采集器管理器
+    /// 北京赛车采集器管理器
     /// </summary>
-    public class CQSSCPickerManager: PickerManager
+    public class BJKCPickerManager: PickerManager
     {
         /// <summary>
         /// 获取采集器
@@ -17,13 +17,13 @@ namespace Alpha.Collector.Core
             switch (dataSource)
             {
                 case DataSource._168:
-                    return (IPicker)Activator.CreateInstance(typeof(_168CQSSCPicker));
+                    return (IPicker)Activator.CreateInstance(typeof(_168BJKCPicker));
                 case DataSource.KCZX:
-                    return (IPicker)Activator.CreateInstance(typeof(KCCQSSCPicker));
+                    return (IPicker)Activator.CreateInstance(typeof(KCBJKCPicker));
                 case DataSource.CJW:
-                    return (IPicker)Activator.CreateInstance(typeof(CJWCQSSCPicker));
+                    return (IPicker)Activator.CreateInstance(typeof(CJWBJKCPicker));
                 default:
-                    return (IPicker)Activator.CreateInstance(typeof(_168CQSSCPicker));
+                    return (IPicker)Activator.CreateInstance(typeof(_168BJKCPicker));
             }
         }
     }

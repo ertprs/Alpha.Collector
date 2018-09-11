@@ -46,14 +46,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CQSSC\CQSSCCollectorManager.cs" />
-    <Compile Include="CQSSC\CJWCQSSCCollector.cs" />
-    <Compile Include="CQSSC\ICQSSCCollector.cs" />
-    <Compile Include="CQSSC\KCCQSSCCollector.cs" />
-    <Compile Include="CQSSC\_168CQSSHCollector.cs" />
-    <Compile Include="DSPicker\CJWPicker.cs" />
-    <Compile Include="DSPicker\KCPicker.cs" />
-    <Compile Include="DSPicker\_168Picker.cs" />
+    <Compile Include="Lottery\IPickerManager.cs" />
+    <Compile Include="Lottery\SSC\CQSSC\CQSSCPickerManager.cs" />
+    <Compile Include="Lottery\SSC\CQSSC\CJWCQSSCPicker.cs" />
+    <Compile Include="Lottery\IPicker.cs" />
+    <Compile Include="Lottery\SSC\CQSSC\KCCQSSCPicker.cs" />
+    <Compile Include="Lottery\SSC\CQSSC\_168CQSSCPicker.cs" />
+    <Compile Include="Lottery\SSC\SSCPickerManager.cs" />
+    <Compile Include="Lottery\SSC\TJSSC\CJWTJSSCPicker.cs" />
+    <Compile Include="Lottery\SSC\TJSSC\KCTJSSCPicker.cs" />
+    <Compile Include="Lottery\SSC\TJSSC\TJSSCPickerManager.cs" />
+    <Compile Include="Lottery\SSC\TJSSC\_168TJSSCPicker.cs" />
+    <Compile Include="Lottery\SSC\XJSSC\CJWXJSSCPicker.cs" />
+    <Compile Include="Lottery\SSC\XJSSC\KCXJSSCPicker.cs" />
+    <Compile Include="Lottery\SSC\XJSSC\XJSSCPickerManager.cs" />
+    <Compile Include="Lottery\SSC\XJSSC\_168XJSSCPicker.cs" />
+    <Compile Include="Picker\CJWPicker.cs" />
+    <Compile Include="Picker\KCPicker.cs" />
+    <Compile Include="Picker\_168Picker.cs" />
     <Compile Include="Log\AlphaMysqlLog.cs" />
     <Compile Include="Log\AlphaFileLog.cs" />
     <Compile Include="Log\AlphaRedisLog.cs" />
@@ -74,6 +84,36 @@
       <Project>{98366994-A207-42FB-BB29-53F88882E654}</Project>
       <Name>Alpha.Collector.Utils</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Lottery\11X5\AH11X5\" />
+    <Folder Include="Lottery\11X5\GD11X5\" />
+    <Folder Include="Lottery\11X5\GX11X5\" />
+    <Folder Include="Lottery\11X5\HB11X5\" />
+    <Folder Include="Lottery\11X5\JL11X5\" />
+    <Folder Include="Lottery\11X5\JS11X5\" />
+    <Folder Include="Lottery\11X5\JX11X5\" />
+    <Folder Include="Lottery\11X5\LN11X5\" />
+    <Folder Include="Lottery\11X5\NMG11X5\" />
+    <Folder Include="Lottery\11X5\SH11X5\" />
+    <Folder Include="Lottery\11X5\ZJ11X5\" />
+    <Folder Include="Lottery\K3\ANK3\" />
+    <Folder Include="Lottery\K3\BJK3\" />
+    <Folder Include="Lottery\K3\FJK3\" />
+    <Folder Include="Lottery\K3\GXK3\" />
+    <Folder Include="Lottery\K3\HeBK3\" />
+    <Folder Include="Lottery\K3\HuBK3\" />
+    <Folder Include="Lottery\K3\JLK3\" />
+    <Folder Include="Lottery\K3\JSK3\" />
+    <Folder Include="Lottery\K3\NMGK3\" />
+    <Folder Include="Lottery\KC\BJKC\" />
+    <Folder Include="Lottery\KL8\BJKL8\" />
+    <Folder Include="Lottery\KL8\PCDD\" />
+    <Folder Include="Lottery\KLSF\CQXYNC\" />
+    <Folder Include="Lottery\KLSF\GDKLSF\" />
+    <Folder Include="Lottery\KLSF\GXKLSF\" />
+    <Folder Include="Lottery\KLSF\TJKLSF\" />
+    <Folder Include="Lottery\LHC\XGLHC\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

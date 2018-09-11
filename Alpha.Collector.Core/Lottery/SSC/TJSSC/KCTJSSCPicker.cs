@@ -5,15 +5,15 @@ using System.Collections.Generic;
 namespace Alpha.Collector.Core
 {
     /// <summary>
-    /// 快彩在线抓取重庆时时彩
+    /// 快彩在线抓取天津时时彩
     /// </summary>
-    internal class KCCQSSCPicker : IPicker
+    internal class KCTJSSCPicker : IPicker
     {
         private KCPicker _kcPicker;
 
-        public KCCQSSCPicker()
+        public KCTJSSCPicker()
         {
-            this._kcPicker = new KCPicker(LotteryType.CQSSC);
+            this._kcPicker = new KCPicker(LotteryType.TJSSC);
         }
 
         /// <summary>
@@ -32,7 +32,7 @@ namespace Alpha.Collector.Core
                 {
                     create_time = DateTime.Now,
                     log_type = LogType.ERROR,
-                    lottery_code = LotteryType.CQSSC,
+                    lottery_code = LotteryType.TJSSC,
                     data_source = DataSource.KCZX,
                     log_message = ex.ToString()
                 };

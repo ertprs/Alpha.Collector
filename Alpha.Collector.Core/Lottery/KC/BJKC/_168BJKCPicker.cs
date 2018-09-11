@@ -6,9 +6,9 @@ using System.Linq;
 namespace Alpha.Collector.Core
 {
     /// <summary>
-    /// 168开奖网抓取重庆时时彩
+    /// 168开奖网抓取北京赛车
     /// </summary>
-    internal class _168CQSSCPicker : IPicker
+    internal class _168BJKCPicker : IPicker
     {
         /// <summary>
         /// 采集地址
@@ -22,7 +22,7 @@ namespace Alpha.Collector.Core
         {
             try
             {
-                _168Picker<_168SSCData> picker = new _168Picker<_168SSCData>(URL, LotteryType.CQSSC);
+                _168Picker<_168SSCData> picker = new _168Picker<_168SSCData>(URL, LotteryType.BJKC);
                 List<_168SSCData> dataList = picker.Pick();
 
                 return (from o in dataList
@@ -30,7 +30,7 @@ namespace Alpha.Collector.Core
                         {
                             create_time = DateTime.Now,
                             open_time = DateTime.Parse(o.preDrawTime),
-                            lottery_code = LotteryType.CQSSC,
+                            lottery_code = LotteryType.BJKC,
                             issue_number = Convert.ToInt64(o.preDrawIssue),
                             open_data = o.preDrawCode,
                             data_source = DataSource._168
@@ -42,7 +42,7 @@ namespace Alpha.Collector.Core
                 {
                     create_time = DateTime.Now,
                     log_type = LogType.ERROR,
-                    lottery_code = LotteryType.CQSSC,
+                    lottery_code = LotteryType.BJKC,
                     data_source = DataSource._168,
                     log_message = ex.ToString()
                 };

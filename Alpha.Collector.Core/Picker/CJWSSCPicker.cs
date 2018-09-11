@@ -7,9 +7,9 @@ using System.Text.RegularExpressions;
 namespace Alpha.Collector.Core
 {
     /// <summary>
-    /// 财经网采集器
+    /// 彩经网时时彩采集器
     /// </summary>
-    public class CJWPicker
+    public class CJWSSCPicker
     {
         private string _lotteryType;
         private string _url;
@@ -19,7 +19,7 @@ namespace Alpha.Collector.Core
         /// </summary>
         /// <param name="lotteryType"></param>
         /// <param name="url"></param>
-        public CJWPicker(string lotteryType, string url)
+        public CJWSSCPicker(string lotteryType, string url)
         {
             this._lotteryType = lotteryType;
             this._url = url;
@@ -38,14 +38,14 @@ namespace Alpha.Collector.Core
             string html = HttpHelper.GetHtml(param, ref errorInfo);
             if (!string.IsNullOrEmpty(errorInfo))
             {
-                throw new Exception($"从财经网采集{this._lotteryType}出错。错误信息：{errorInfo}，抓取地址：{this._url}");
+                throw new Exception($"从彩经网采集{this._lotteryType}出错。错误信息：{errorInfo}，抓取地址：{this._url}");
             }
 
             Regex regex = new Regex(@"<table[^><]*class=""kjjg_table"">(?<html>[\S\s]*?)</table>", RegexOptions.IgnoreCase);
             Match match = regex.Match(html);
             if (!match.Success)
             {
-                throw new Exception($"从财经网采集{this._lotteryType}出错。抓取地址：{this._url}，源代码：{html}");
+                throw new Exception($"从彩经网采集{this._lotteryType}出错。抓取地址：{this._url}，源代码：{html}");
             }
 
             html = match.Groups["html"].Value;
@@ -54,7 +54,7 @@ namespace Alpha.Collector.Core
             MatchCollection matches = regex.Matches(html);
             if (matches.Count == 0)
             {
-                throw new Exception($"从财经网采集{this._lotteryType}出错。抓取地址：{this._url}，源代码：{html}");
+                throw new Exception($"从彩经网采集{this._lotteryType}出错。抓取地址：{this._url}，源代码：{html}");
             }
 
             List<OpenResult> resultList = new List<OpenResult>();

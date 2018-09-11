@@ -16,21 +16,11 @@ namespace Alpha.Collector.Test
     {
         static void Main(string[] args)
         {
-            //List<OpenResult> resultList = CQSSCCollectorManager.GetInstance(DataSourceEnum._168).Run();
-            List<OpenResult> resultList = CQSSCPickerManager.Run(4);
+            List<OpenResult> resultList;
+            IPickerManager manager = new XJSSCPickerManager();
+            resultList = manager.GetPicker(DataSource.CJW).Run();
+
             int result = OpenResultDAO.Insert(resultList);
-
-            AppLog appLog = new AppLog
-            {
-                create_time = DateTime.Now,
-                log_type = "INFO",
-                lottery_code = LotteryType.CQSSC,
-                log_message = "抓取到重庆时时彩开奖结果：",
-                data_source = DataSource._168
-            };
-
-            AlphaLogManager.Info(appLog);
-
         }
     }
 }

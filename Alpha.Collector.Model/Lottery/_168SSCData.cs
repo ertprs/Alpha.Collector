@@ -1,9 +1,9 @@
 ﻿namespace Alpha.Collector.Model
 {
     /// <summary>
-    /// 168开奖网CQSSC开奖数据
+    /// 168开奖网SSC开奖数据
     /// </summary>
-    public class _168CQSSCData
+    public class _168SSCData
     {
         /// <summary>
         /// 开奖号码

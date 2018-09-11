@@ -1,20 +1,18 @@
-﻿using Alpha.Collector.Model;
+﻿using System.Collections.Generic;
+using Alpha.Collector.Model;
 using System;
-using System.Collections.Generic;
 
 namespace Alpha.Collector.Core
 {
     /// <summary>
-    /// 快彩在线抓取重庆时时彩
+    /// 彩经网采集北京赛车
     /// </summary>
-    internal class KCCQSSCPicker : IPicker
+    internal class CJWBJKCPicker : IPicker
     {
-        private KCPicker _kcPicker;
-
-        public KCCQSSCPicker()
-        {
-            this._kcPicker = new KCPicker(LotteryType.CQSSC);
-        }
+        /// <summary>
+        /// 抓取地址
+        /// </summary>
+        private const string URL = "https://shishicai.cjcp.com.cn/chongqing/kaijiang/";
 
         /// <summary>
         /// 执行抓取
@@ -24,16 +22,17 @@ namespace Alpha.Collector.Core
         {
             try
             {
-                return this._kcPicker.Pick();
+                CJWSSCPicker picker = new CJWSSCPicker(LotteryType.BJKC, URL);
+                return picker.Pick();
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
                 AppLog appLog = new AppLog
                 {
                     create_time = DateTime.Now,
                     log_type = LogType.ERROR,
-                    lottery_code = LotteryType.CQSSC,
-                    data_source = DataSource.KCZX,
+                    lottery_code = LotteryType.BJKC,
+                    data_source = DataSource.CJW,
                     log_message = ex.ToString()
                 };
                 AlphaLogManager.Error(appLog);

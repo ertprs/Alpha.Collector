@@ -44,7 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CQSSC\_168CQSSCData.cs" />
+    <Compile Include="Lottery\_168SSCData.cs" />
     <Compile Include="DataBase\AppLog.cs" />
     <Compile Include="DataBase\OpenResult.cs" />
     <Compile Include="DSResponse\KCResponse.cs" />

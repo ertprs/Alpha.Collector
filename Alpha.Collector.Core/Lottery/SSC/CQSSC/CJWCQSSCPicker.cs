@@ -5,7 +5,7 @@ using System;
 namespace Alpha.Collector.Core
 {
     /// <summary>
-    /// 财经网采集重庆时时彩
+    /// 彩经网采集重庆时时彩
     /// </summary>
     internal class CJWCQSSCPicker : IPicker
     {
@@ -22,7 +22,7 @@ namespace Alpha.Collector.Core
         {
             try
             {
-                CJWPicker picker = new CJWPicker(LotteryType.CQSSC, URL);
+                CJWSSCPicker picker = new CJWSSCPicker(LotteryType.CQSSC, URL);
                 return picker.Pick();
             }
             catch(Exception ex)
@@ -30,7 +30,7 @@ namespace Alpha.Collector.Core
                 AppLog appLog = new AppLog
                 {
                     create_time = DateTime.Now,
-                    log_type = "Error",
+                    log_type = LogType.ERROR,
                     lottery_code = LotteryType.CQSSC,
                     data_source = DataSource.CJW,
                     log_message = ex.ToString()

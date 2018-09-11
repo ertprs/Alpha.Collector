@@ -47,12 +47,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Lottery\IPickerManager.cs" />
+    <Compile Include="Lottery\KC\BJKC\CJWBJKCPicker.cs" />
+    <Compile Include="Lottery\KC\BJKC\BJKCPickerManager.cs" />
+    <Compile Include="Lottery\KC\BJKC\KCBJKCPicker.cs" />
+    <Compile Include="Lottery\KC\BJKC\_168BJKCPicker.cs" />
     <Compile Include="Lottery\SSC\CQSSC\CQSSCPickerManager.cs" />
     <Compile Include="Lottery\SSC\CQSSC\CJWCQSSCPicker.cs" />
     <Compile Include="Lottery\IPicker.cs" />
     <Compile Include="Lottery\SSC\CQSSC\KCCQSSCPicker.cs" />
     <Compile Include="Lottery\SSC\CQSSC\_168CQSSCPicker.cs" />
-    <Compile Include="Lottery\SSC\SSCPickerManager.cs" />
+    <Compile Include="Lottery\SSCPickerManager.cs" />
     <Compile Include="Lottery\SSC\TJSSC\CJWTJSSCPicker.cs" />
     <Compile Include="Lottery\SSC\TJSSC\KCTJSSCPicker.cs" />
     <Compile Include="Lottery\SSC\TJSSC\TJSSCPickerManager.cs" />
@@ -61,7 +65,8 @@
     <Compile Include="Lottery\SSC\XJSSC\KCXJSSCPicker.cs" />
     <Compile Include="Lottery\SSC\XJSSC\XJSSCPickerManager.cs" />
     <Compile Include="Lottery\SSC\XJSSC\_168XJSSCPicker.cs" />
-    <Compile Include="Picker\CJWPicker.cs" />
+    <Compile Include="Picker\CJWKCPicker.cs" />
+    <Compile Include="Picker\CJWSSCPicker.cs" />
     <Compile Include="Picker\KCPicker.cs" />
     <Compile Include="Picker\_168Picker.cs" />
     <Compile Include="Log\AlphaMysqlLog.cs" />
@@ -106,7 +111,6 @@
     <Folder Include="Lottery\K3\JLK3\" />
     <Folder Include="Lottery\K3\JSK3\" />
     <Folder Include="Lottery\K3\NMGK3\" />
-    <Folder Include="Lottery\KC\BJKC\" />
     <Folder Include="Lottery\KL8\BJKL8\" />
     <Folder Include="Lottery\KL8\PCDD\" />
     <Folder Include="Lottery\KLSF\CQXYNC\" />

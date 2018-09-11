@@ -21,8 +21,8 @@ namespace Alpha.Collector.Dao
                 return 1;
             }
 
-            string sql = "insert into open_result (create_time, create_timestamp, open_time, open_timestamp, lottery_code, issue_number, open_data, data_source) "
-                       + "values (@create_time, @create_timestamp, @open_time, @open_timestamp, @lottery_code, @issue_number, @open_data, @data_source)";
+            string sql = "insert into open_result (create_time, create_timestamp, open_time, open_timestamp, lottery_code, issue_number, open_data, data_source, is_legal) "
+                       + "values (@create_time, @create_timestamp, @open_time, @open_timestamp, @lottery_code, @issue_number, @open_data, @data_source, @is_legal)";
             return MySqlHelper.Execute(sql, resultList.Where(o => !Exists(o.issue_number, o.lottery_code)).OrderBy(o => o.issue_number));
         }
 

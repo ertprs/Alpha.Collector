@@ -18,7 +18,7 @@ namespace Alpha.Collector.Test
         {
             List<OpenResult> resultList;
             IPickerManager manager = new XJSSCPickerManager();
-            resultList = manager.GetPicker(DataSource.CJW).Run();
+            resultList = manager.GetPicker(DataSource._168).Run();
 
             int result = OpenResultDAO.Insert(resultList);
         }

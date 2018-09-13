@@ -10,7 +10,7 @@
         /// </summary>
         public string TableName { get; set; }
 
-        private string _pkField = "F_Id";
+        private string _pkField = "id";
         /// <summary>
         /// 主键名称
         /// </summary>

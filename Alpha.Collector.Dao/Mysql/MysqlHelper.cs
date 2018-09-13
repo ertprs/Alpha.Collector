@@ -10,7 +10,7 @@ namespace Alpha.Collector.Dao
     /// <summary>
     /// MysqlHelper
     /// </summary>
-    public static class MySqlHelper
+    public static class MysqlHelper
     {
         /// <summary>
         /// 数据库连接字符串
@@ -108,7 +108,7 @@ namespace Alpha.Collector.Dao
         /// <param name="param"></param>
         /// <param name="splitOn"></param>
         /// <returns></returns>
-        public static IList<TReturn> GetList<TFirst, TSecond, TReturn>(string sql, Func<TFirst, TSecond, TReturn> map, object param = null, string splitOn = "F_Id")
+        public static IList<TReturn> GetList<TFirst, TSecond, TReturn>(string sql, Func<TFirst, TSecond, TReturn> map, object param = null, string splitOn = "id")
         {
             try
             {

@@ -58,10 +58,22 @@ namespace Alpha.Collector.Model
         /// </summary>
         public long issue_number { get; set; }
 
+        private string _open_data;
         /// <summary>
         /// 开奖号码
         /// </summary>
-        public string open_data { get; set; }
+        public string open_data
+        {
+            get
+            {
+                List<string> numList = this._open_data.Split(',').ToList();
+                return numList.Aggregate(string.Empty, (c, r) => c + r.Trim().TrimStart('0') + ',').TrimEnd(',');
+            }
+            set
+            {
+                this._open_data = value;
+            }
+        }
 
         /// <summary>
         /// 数据源
@@ -98,7 +110,7 @@ namespace Alpha.Collector.Model
         {
             switch (this.lottery_code)
             {
-                case LotteryType.ANK3:
+                case LotteryType.AHK3:
                 case LotteryType.BJK3:
                 case LotteryType.FJK3:
                 case LotteryType.GSK3:
@@ -128,9 +140,11 @@ namespace Alpha.Collector.Model
 
                 case LotteryType.CQXYNC:
                 case LotteryType.GDKLSF:
-                case LotteryType.GXKLSF:
                 case LotteryType.TJKLSF:
                     return this.CheckKLSFLegal();
+
+                case LotteryType.GXKLSF://TODO:广西快乐十分的期号样式待定
+                    return true;
 
                 case LotteryType.CQSSC:
                 case LotteryType.TJSSC:
@@ -138,7 +152,7 @@ namespace Alpha.Collector.Model
                     return this.CheckSSCLegal();
 
                 case LotteryType.FC3D:
-                case LotteryType.PL3:
+                case LotteryType.TCPL3:
                     return this.CheckFC3DLegal();
 
                 case LotteryType.PCDD:

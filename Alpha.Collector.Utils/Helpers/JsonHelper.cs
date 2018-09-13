@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Data;
 
@@ -62,6 +63,27 @@ namespace Alpha.Collector.Utils
                 DateFormatString = "yyyy-MM-dd HH:mm:ss",
                 NullValueHandling = (ignoreNull ? NullValueHandling.Ignore : NullValueHandling.Include)
             });
+        }
+
+        /// <summary>
+        /// object转换为json字符串
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        public static string ToJson(this object obj)
+        {
+            var timeConverter = new IsoDateTimeConverter { DateTimeFormat = "yyyy-MM-dd HH:mm:ss" };
+            return JsonConvert.SerializeObject(obj, timeConverter);
+        }
+
+        /// <summary>
+        /// json字符串转为JObject
+        /// </summary>
+        /// <param name="Json"></param>
+        /// <returns></returns>
+        public static JObject ToJObject(this string Json)
+        {
+            return Json == null ? JObject.Parse("{}") : JObject.Parse(Json.Replace("&nbsp;", ""));
         }
     }
 }

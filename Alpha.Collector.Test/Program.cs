@@ -17,10 +17,10 @@ namespace Alpha.Collector.Test
         static void Main(string[] args)
         {
             List<OpenResult> resultList;
-            IPickerManager manager = new XJSSCPickerManager();
+            IPickerManager manager = new BJKCPickerManager();
             resultList = manager.GetPicker(DataSource._168).Run();
 
-            int result = OpenResultDAO.Insert(resultList);
+            int result = OpenResultApp.Insert(resultList);
         }
     }
 }

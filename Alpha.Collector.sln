@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alpha.Collector.Test", "Alp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alpha.Collector.Core", "Alpha.Collector.Core\Alpha.Collector.Core.csproj", "{4EF37479-0A18-4FF6-B25E-454637B1683B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alpha.Collector.Service", "Alpha.Collector.Service\Alpha.Collector.Service.csproj", "{42876754-0119-4D39-A3E6-8DB7CAE069E8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{4EF37479-0A18-4FF6-B25E-454637B1683B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4EF37479-0A18-4FF6-B25E-454637B1683B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4EF37479-0A18-4FF6-B25E-454637B1683B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{42876754-0119-4D39-A3E6-8DB7CAE069E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{42876754-0119-4D39-A3E6-8DB7CAE069E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{42876754-0119-4D39-A3E6-8DB7CAE069E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{42876754-0119-4D39-A3E6-8DB7CAE069E8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

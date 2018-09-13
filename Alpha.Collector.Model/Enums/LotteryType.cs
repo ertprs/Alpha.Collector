@@ -35,7 +35,7 @@
         /// <summary>
         /// 安徽快3
         /// </summary>
-        public const string ANK3 = "ANK3";
+        public const string AHK3 = "AHK3";
 
         /// <summary>
         /// 湖北快3
@@ -202,6 +202,11 @@
         /// </summary>
         public const string CQXYNC = "CQXYNC";
 
+        /// <summary>
+        /// 湖南快乐十分
+        /// </summary>
+        public const string HNKLSF = "HNKLSF";
+
         #endregion 快乐十分
 
 
@@ -220,7 +225,7 @@
         /// <summary>
         /// 体彩排列3
         /// </summary>
-        public const string PL3 = "PL3";
+        public const string TCPL3 = "TCPL3";
 
         #endregion 六合彩
     }

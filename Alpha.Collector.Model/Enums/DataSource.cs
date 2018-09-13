@@ -19,5 +19,20 @@
         /// 彩经网
         /// </summary>
         public const string CJW = "彩经网";
+
+        /// <summary>
+        /// 彩世界
+        /// </summary>
+        public const string CSJ = "彩世界";
+
+        /// <summary>
+        /// 乐博
+        /// </summary>
+        public const string ROBO = "乐博";
+
+        /// <summary>
+        /// 必发
+        /// </summary>
+        public const string BiFa = "必发";
     }
 }

@@ -44,43 +44,27 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataBase\AuthorizeActionModel.cs" />
-    <Compile Include="DataBase\SysArea.cs" />
-    <Compile Include="DataBase\SysDbBackup.cs" />
-    <Compile Include="DataBase\SysFilterIP.cs" />
-    <Compile Include="DataBase\SysItems.cs" />
-    <Compile Include="DataBase\SysItemsDetail.cs" />
-    <Compile Include="DataBase\SysLog.cs" />
-    <Compile Include="DataBase\SysModule.cs" />
-    <Compile Include="DataBase\SysModuleButton.cs" />
-    <Compile Include="DataBase\SysModuleForm.cs" />
-    <Compile Include="DataBase\SysModuleFormInstance.cs" />
-    <Compile Include="DataBase\SysOrganize.cs" />
-    <Compile Include="DataBase\SysRole.cs" />
-    <Compile Include="DataBase\SysRoleAuthorize.cs" />
-    <Compile Include="DataBase\SysUser.cs" />
-    <Compile Include="DataBase\SysUserLogOn.cs" />
+    <Compile Include="DataBase\DataSource.cs" />
+    <Compile Include="DataBase\Lottery.cs" />
     <Compile Include="DSResponse\BiFaResponse.cs" />
+    <Compile Include="DSResponse\DuoBaoReponse.cs" />
     <Compile Include="DSResponse\RoboResponse.cs" />
-    <Compile Include="Enums\DbLogType.cs" />
-    <Compile Include="Lottery\_168SSCData.cs" />
+    <Compile Include="Enums\CacheKey.cs" />
+    <Compile Include="Exts\ModelExts.cs" />
+    <Compile Include="Exts\ModelFunction.cs" />
     <Compile Include="DataBase\AppLog.cs" />
     <Compile Include="DataBase\OpenResult.cs" />
     <Compile Include="DSResponse\KCResponse.cs" />
-    <Compile Include="Enums\DataSource.cs" />
-    <Compile Include="Enums\LogPosition.cs" />
-    <Compile Include="Enums\LogType.cs" />
-    <Compile Include="Enums\LotteryType.cs" />
+    <Compile Include="Enums\DataSourceEnum.cs" />
+    <Compile Include="Enums\LogPositionEnum.cs" />
+    <Compile Include="Enums\LogTypeEnum.cs" />
+    <Compile Include="Enums\LotteryEnum.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DSResponse\_168Response.cs" />
     <Compile Include="Web\AjaxResult.cs" />
-    <Compile Include="Web\TreeGrid.cs" />
-    <Compile Include="Web\TreeGridModel.cs" />
-    <Compile Include="Web\TreeQuery.cs" />
-    <Compile Include="Web\TreeSelect.cs" />
-    <Compile Include="Web\TreeSelectModel.cs" />
-    <Compile Include="Web\TreeView.cs" />
-    <Compile Include="Web\TreeViewModel.cs" />
+    <Compile Include="Web\PickCount.cs" />
+    <Compile Include="Web\ServiceResult.cs" />
+    <Compile Include="Web\ServiceResultExt.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Alpha.Collector.Utils\Alpha.Collector.Utils.csproj">

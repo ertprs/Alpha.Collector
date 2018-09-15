@@ -62,7 +62,7 @@ namespace Alpha.Collector.Core
                 {
                     create_time = DateTime.Now,
                     lottery_code = this._lotteryType,
-                    data_source = DataSource.CSJ
+                    data_source = DataSourceEnum.CSJ
                 };
 
                 result.issue_number = Convert.ToInt64(m.Groups["issueNo"].Value.Replace("-", ""));

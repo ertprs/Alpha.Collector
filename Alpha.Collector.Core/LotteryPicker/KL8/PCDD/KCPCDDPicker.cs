@@ -8,13 +8,13 @@ namespace Alpha.Collector.Core
     /// <summary>
     /// 快彩在线采集PC蛋蛋
     /// </summary>
-    public class KCPCDDPicker : IPicker
+    public class KCPCDDPicker : BasePicker, IPicker, IPCDDPicker
     {
         private KCPicker _kcPicker;
 
         public KCPCDDPicker()
         {
-            this._kcPicker = new KCPicker(LotteryType.BJKL8);
+            this._kcPicker = new KCPicker(LotteryEnum.BJKL8);
         }
 
         /// <summary>
@@ -32,7 +32,7 @@ namespace Alpha.Collector.Core
                         {
                             create_time = r.create_time,
                             open_time = r.open_time,
-                            lottery_code = LotteryType.PCDD,
+                            lottery_code = LotteryEnum.PCDD,
                             issue_number = r.issue_number,
                             open_data = ((Convert.ToInt32(arr[0]) + Convert.ToInt32(arr[1]) + Convert.ToInt32(arr[2]) + Convert.ToInt32(arr[3]) + Convert.ToInt32(arr[4]) + Convert.ToInt32(arr[5])) % 10) + "," +
                                         ((Convert.ToInt32(arr[6]) + Convert.ToInt32(arr[7]) + Convert.ToInt32(arr[8]) + Convert.ToInt32(arr[9]) + Convert.ToInt32(arr[10]) + Convert.ToInt32(arr[11])) % 10) + "," +
@@ -45,14 +45,25 @@ namespace Alpha.Collector.Core
                 AppLog appLog = new AppLog
                 {
                     create_time = DateTime.Now,
-                    log_type = LogType.ERROR,
-                    lottery_code = LotteryType.PCDD,
-                    data_source = DataSource.KCZX,
+                    log_type = LogTypeEnum.ERROR,
+                    lottery_code = LotteryEnum.PCDD,
+                    data_source = DataSourceEnum.KC,
                     log_message = ex.ToString()
                 };
                 AlphaLogManager.Error(appLog);
 
                 return new List<OpenResult>();
+            }
+        }
+
+        /// <summary>
+        /// 是否有效
+        /// </summary>
+        public bool IsValid
+        {
+            get
+            {
+                return base.LotteryList.Contains(LotteryEnum.PCDD) && base.DataSourceList.Contains(DataSourceEnum.KC);
             }
         }
     }

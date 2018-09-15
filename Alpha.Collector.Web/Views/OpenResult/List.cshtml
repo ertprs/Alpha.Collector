@@ -1,0 +1,57 @@
+﻿@using Alpha.Collector.Model;
+@using Alpha.Collector.Web;
+@model Query<OpenResult, OpenResultParams>
+@{
+    ViewBag.Title = "开奖结果列表";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+<div class="portlet">
+    <div class="panel panel-success">
+        <div class="panel-heading">
+            <div class="caption"><i class="icon-user"></i> 开奖结果列表</div>
+        </div>
+
+    </div>
+    @using (Html.PageView("List", "OpenResult", "OpenResultForm", "OpenResultContainer", "List_Partial", Model))
+    {
+        <div class="panel panel-default">
+            <div class="panel-heading ">
+                <div class="form-inline">
+                    <label>彩种代码：</label>
+                    <select class="form-control input-small select2me" id="Params_LotteryCode" name="Params.LotteryCode" data-placeholder="全部" onclick="$('#OpenResultForm').submit();">
+                        <option value=""></option>
+                        @foreach (var item in ViewBag.LotteryList as List<SelectListItem>)
+                        {
+                            <option value="@item.Value">@item.Text</option>
+                        }
+                    </select>
+                    <label>数据源：</label>
+                    <select class="form-control input-small select2me" id="Params_DataSource" name="Params.DataSource" data-placeholder="全部" onclick="$('#OpenResultForm').submit();">
+                        <option value=""></option>
+                        @foreach (var item in ViewBag.DataSourceList as List<SelectListItem>)
+                        {
+                            <option value="@item.Value">@item.Text</option>
+                        }
+                    </select>
+                    <label>开奖时间：</label>@Html.DayTimePickerFor(m => m.Params.StartOpenTime, "开始时间", 2)-@Html.DayTimePickerFor(m => m.Params.EndOpenTime, "结束时间", 2)
+                    <label>期号：</label> @Html.TextBoxFor(m => m.Params.IssueNumber, new { @class = "form-control", placeholder = "期号" })
+                    <label>是否合法：</label>
+                    <select name="Params.IsLegal" class="form-control input-xsmall" onclick="$('#OpenResultForm').submit();">
+                        <option value="" selected="selected">全部</option>
+                        <option value="1">是</option>
+                        <option value="0">否</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default margin-bottom-5">
+            <div class="panel-heading">
+                <button type="submit" class="btn btn-circle btn-sm yellow"><i class="fa fa-search"></i> 查询</button>
+                <button type="reset" id="userReset" class="btn btn-circle btn-sm blue"><i class="fa fa-undo"></i> 重置</button>
+            </div>
+        </div>
+    }
+</div>
+

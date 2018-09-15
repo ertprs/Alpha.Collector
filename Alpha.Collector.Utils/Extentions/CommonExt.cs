@@ -59,6 +59,16 @@ namespace Alpha.Collector.Utils
         }
 
         /// <summary>
+        /// 是否为null
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        public static bool IsNull(this object obj)
+        {
+            return obj == null;
+        }
+
+        /// <summary>
         /// 转换为双精度浮点数
         /// </summary>
         /// <param name="data">数据</param>
@@ -310,7 +320,7 @@ namespace Alpha.Collector.Utils
         /// 是否为空
         /// </summary>
         /// <param name="value">值</param>
-        public static bool IsEmpty(this string value)
+        public static bool IsNullOrEmpty(this string value)
         {
             return string.IsNullOrWhiteSpace(value);
         }
@@ -319,18 +329,18 @@ namespace Alpha.Collector.Utils
         /// 是否为空
         /// </summary>
         /// <param name="value">值</param>
-        public static bool IsEmpty(this Guid? value)
+        public static bool IsNullOrEmpty(this Guid? value)
         {
             if (value == null)
                 return true;
-            return IsEmpty(value.Value);
+            return IsNullOrEmpty(value.Value);
         }
 
         /// <summary>
         /// 是否为空
         /// </summary>
         /// <param name="value">值</param>
-        public static bool IsEmpty(this Guid value)
+        public static bool IsNullOrEmpty(this Guid value)
         {
             if (value == Guid.Empty)
                 return true;
@@ -341,7 +351,7 @@ namespace Alpha.Collector.Utils
         /// 是否为空
         /// </summary>
         /// <param name="value">值</param>
-        public static bool IsEmpty(this object value)
+        public static bool IsNullOrEmpty(this object value)
         {
             if (value != null && !string.IsNullOrEmpty(value.ToString()))
             {
@@ -351,6 +361,34 @@ namespace Alpha.Collector.Utils
             {
                 return true;
             }
+        }
+
+        /// <summary>
+        /// 转换为时间戳
+        /// </summary>
+        /// <param name="datetime"></param>
+        /// <returns></returns>
+        public static long ToTimestamp(this DateTime datetime)
+        {
+            DateTime startTime = TimeZone.CurrentTimeZone.ToLocalTime(new DateTime(1970, 1, 1));
+            return (long)(datetime - startTime).TotalMilliseconds;
+        }
+
+        /// <summary>
+        /// 转换为日期
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static DateTime TryDateTime(this string value)
+        {
+            if(string.IsNullOrEmpty(value))
+            {
+                return DateTime.MinValue;
+            }
+
+            DateTime datetime;
+            bool b = DateTime.TryParse(value, out datetime);
+            return b ? datetime : DateTime.MinValue;
         }
     }
 }

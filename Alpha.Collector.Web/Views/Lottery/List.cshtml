@@ -1,0 +1,188 @@
+﻿@using Alpha.Collector.Model;
+@using Alpha.Collector.Web;
+@model Query<Lottery, LotteryParams>
+@{
+    ViewBag.Title = "彩种列表";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="portlet">
+    <div class="panel panel-success">
+        <div class="panel-heading">
+            <div class="caption"><i class="icon-user"></i> 彩种列表</div>
+        </div>
+    </div>
+    @using (Html.PageView("List", "Lottery", "LotteryForm", "LotteryContainer", "List_Partial", Model))
+    {
+        <div class="panel panel-default">
+            <div class="panel-heading ">
+                <div class="form-inline">
+                    <label>彩种：</label>
+                    <select class="form-control input-small select2me" id="Params_LotteryCode" name="Params.LotteryCode" data-placeholder="全部" onclick="$('#LotteryForm').submit();">
+                        <option value=""></option>
+                        @foreach (var item in ViewBag.LotteryList as List<SelectListItem>)
+                        {
+                            <option value="@item.Value">@item.Text</option>
+                        }
+                    </select>
+                    <label>状态：</label>
+                    <select class="form-control" id="Params_State" name="Params.State" onclick="$('#LotteryForm').submit();">
+                        <option value="">全部</option>
+                        <option value="1">抓取中</option>
+                        <option value="0">停止中</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default margin-bottom-5">
+            <div class="panel-heading">
+                <button type="submit" class="btn btn-circle btn-sm yellow"><i class="fa fa-search"></i> 查询</button>
+                <button type="reset" id="userReset" class="btn btn-circle btn-sm blue"><i class="fa fa-undo"></i> 重置</button>
+                <a id="btnBatchStart" class="btn btn-circle btn-sm green"><i class="fa fa-trash-o fa-fw"></i>批量开启</a>
+                <a id="btnBatchStop" class="btn btn-circle btn-sm purple"><i class="fa fa-trash-o fa-fw"></i>批量停止</a>
+            </div>
+        </div>
+    }
+</div>
+<div id="DetailsDiv" class="modal fade-in-up"></div>
+@section footer{
+    <script type="text/javascript">
+        $("#btnBatchStart").live("click",
+            function () {
+                var selectedItems = $("#LotteryContainer input[type='checkbox'][selectitem]:checked");
+                if (selectedItems.length == 0) {
+                    App.Alert("您没有选中任何一项!");
+                    return;
+                }
+
+                var ids = "";
+                selectedItems.each(function (i, e) {
+                    ids += $(e).val() + ",";
+                });
+
+                $btn = $(this);
+                App.Confirm("确定开启选中彩种的采集吗？【操作完成后，重启抓取服务才能生效】",
+                    function (e) {
+                        if (e) {
+                            $.ajax({
+                                type: "POST",
+                                url: "/Lottery/UpdateStatus",
+                                data: { id: ids, status: 1 }
+                            }).done(function (data) {
+                                if (data.Success) {
+                                    App.Notify(data.Message);
+                                    $("#LotteryForm").submit();
+                                } else {
+                                    App.Alert(data.Message);
+                                }
+                            });
+                        }
+                    });
+            });
+
+        $("#btnBatchStop").live("click",
+            function () {
+                var selectedItems = $("#LotteryContainer input[type='checkbox'][selectitem]:checked");
+                if (selectedItems.length == 0) {
+                    App.Alert("您没有选中任何一项!");
+                    return;
+                }
+
+                var ids = "";
+                selectedItems.each(function (i, e) {
+                    ids += $(e).val() + ",";
+                });
+
+                $btn = $(this);
+                App.Confirm("确定停止选中彩种的采集吗？【操作完成后，重启抓取服务才能生效】",
+                    function (e) {
+                        if (e) {
+                            $.ajax({
+                                type: "POST",
+                                url: "/Lottery/UpdateStatus",
+                                data: { id: ids, status: 0 }
+                            }).done(function (data) {
+                                if (data.Success) {
+                                    App.Notify(data.Message);
+                                    $("#LotteryForm").submit();
+                                } else {
+                                    App.Alert(data.Message);
+                                }
+                            });
+                        }
+                    });
+            });
+
+        $(".startPick").live("click",
+            function () {
+                $btn = $(this);
+                App.Confirm("确定开启" + $btn.attr("itemName") + "的采集吗？【操作完成后，重启抓取服务才能生效】",
+                    function (e) {
+                        if (e) {
+                            $.ajax({
+                                type: "POST",
+                                url: "/Lottery/UpdateStatus",
+                                data: { id: $btn.attr("itemId"), status: 1 }
+                            }).done(function (data) {
+                                if (data.Success) {
+                                    App.Notify(data.Message);
+                                    $("#LotteryForm").submit();
+                                } else {
+                                    App.Alert(data.Message);
+                                }
+                            });
+                        }
+                    });
+            });
+
+        $(".stopPick").live("click",
+           function () {
+               $btn = $(this);
+               App.Confirm("确定停止" + $btn.attr("itemName") + "的采集吗？【操作完成后，重启抓取服务才能生效】",
+                   function (e) {
+                       if (e) {
+                           $.ajax({
+                               type: "POST",
+                               url: "/Lottery/UpdateStatus",
+                               data: { id: $btn.attr("itemId"), status: 0 }
+                           }).done(function (data) {
+                               if (data.Success) {
+                                   App.Notify(data.Message);
+                                   $("#LotteryForm").submit();
+                               } else {
+                                   App.Alert(data.Message);
+                               }
+                           });
+                       }
+                   });
+           });
+
+        //全选
+        $("#LotteryContainer [selectall]").live("click", function () {
+            if ($(this).prop('checked')) {
+                $("input[type='checkbox'][selectitem]").each(function () {
+                    $(this).attr('checked', true);
+                    $(this).parent().addClass('checked');
+                });
+            } else {
+                $("input[type='checkbox'][selectitem]").each(function () {
+                    if ($(this).attr('checked')) {
+                        $(this).attr('checked', false);
+                        $(this).parent().removeClass('checked');
+                    } else {
+                        $(this).attr('checked', true);
+                        $(this).parent().addClass('checked');
+                    }
+                });
+            }
+        });
+
+        $(".showDetail").live("click", function () {
+            var id = $(this).attr("itemId");
+            var code = $(this).attr("itemCode");
+            App.LoadModal("#DetailsDiv", "/Lottery/PickDetail",
+                { id: id, lotteryCode: code });
+        });
+    </script>
+}
+

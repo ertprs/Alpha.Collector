@@ -1,5 +1,6 @@
-﻿using Alpha.Collector.Model;
+﻿using Alpha.Collector.Utils;
 using System;
+using System.Collections.Generic;
 
 namespace Alpha.Collector.Core
 {
@@ -9,22 +10,59 @@ namespace Alpha.Collector.Core
     public class CQSSCPickerManager: PickerManager
     {
         /// <summary>
+        /// 获取采集器列表
+        /// </summary>
+        /// <returns></returns>
+        public override List<IPicker> GetPickerList()
+        {
+            List<Type> list = ReflectionHelper.GetClasses<ICQSSCPicker>();
+            List<IPicker> pickerList = new List<IPicker>();
+            foreach (Type type in list)
+            {
+                try
+                {
+                    ICQSSCPicker picker = Activator.CreateInstance(type) as ICQSSCPicker;
+                    if (picker != null && picker.IsValid)
+                    {
+                        pickerList.Add(picker);
+                    }
+
+                }
+                catch (Exception ex)
+                {
+
+                }
+            }
+
+            return pickerList;
+        }
+
+        /// <summary>
         /// 获取采集器
         /// </summary>
-        /// <param name="collector"></param>
+        /// <param name="dataSource"></param>
+        /// <returns></returns>
         public override IPicker GetPicker(string dataSource)
         {
-            switch (dataSource)
+            List<Type> list = ReflectionHelper.GetClasses<ICQSSCPicker>();
+            foreach (Type type in list)
             {
-                case DataSource._168:
-                    return (IPicker)Activator.CreateInstance(typeof(_168CQSSCPicker));
-                case DataSource.KCZX:
-                    return (IPicker)Activator.CreateInstance(typeof(KCCQSSCPicker));
-                case DataSource.CJW:
-                    return (IPicker)Activator.CreateInstance(typeof(CJWCQSSCPicker));
-                default:
+                try
+                {
+                    ICQSSCPicker picker = Activator.CreateInstance(type) as ICQSSCPicker;
+                    if (picker != null && type.Name.ToLower().Contains(dataSource.ToLower()))
+                    {
+                        return picker;
+                    }
+
+                }
+                catch (Exception ex)
+                {
                     return null;
+                }
             }
+
+            return null;
         }
     }
 }

@@ -50,6 +50,28 @@ namespace Alpha.Collector.Model
         public string data_source { get; set; }
 
         /// <summary>
+        /// 数据源文字表示
+        /// </summary>
+        public string DataSourceText
+        {
+            get
+            {
+                return ModelFunction.GetDataSourceName(this.data_source);
+            }
+        }
+
+        /// <summary>
+        /// 格式化后的消息
+        /// </summary>
+        public string FormatMessage
+        {
+            get
+            {
+                return this.log_message.Length > 100 ? this.log_message.Substring(0, 100) + "..." : this.log_message;
+            }
+        }
+
+        /// <summary>
         /// 重写ToString
         /// </summary>
         /// <returns></returns>

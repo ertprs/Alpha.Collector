@@ -1,0 +1,247 @@
+﻿
+<!DOCTYPE html>
+<!--
+Template Name: Metronic - Responsive Admin Dashboard Template build with Twitter Bootstrap 3.3.5
+Version: 4.1.0
+Author: KeenThemes
+Website: http://www.keenthemes.com/
+Contact: support@keenthemes.com
+Follow: www.twitter.com/keenthemes
+Like: www.facebook.com/keenthemes
+Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-template/4021469?ref=keenthemes
+-->
+<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+<!--<![endif]-->
+<!-- BEGIN HEAD -->
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <meta content="" name="description" />
+    <meta content="" name="author" />
+    <!-- BEGIN GLOBAL MANDATORY STYLES -->
+    <link href="~/content/layout/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="~/content/layout/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css">
+    <link href="~/content/layout/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="~/content/layout/global/plugins/uniform/css/uniform.default.min.css" rel="stylesheet" type="text/css">
+    <link href="~/content/layout/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/content/layout/global/plugins/bootstrap-modal/css/bootstrap-modal-bs3patch.css" rel="stylesheet" type="text/css" />
+    <link href="~/content/layout/global/plugins/bootstrap-modal/css/bootstrap-modal.css" rel="stylesheet" type="text/css" />
+    @*<link href="~/content/layout/global/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet" type="text/css" />*@
+    <link href="/Content/Layout/global/plugins/eonasdan-bootstrap-datetimepicker/css/bootstrap-datetimepicker.css" rel="stylesheet" />
+    <link href="~/content/layout/global/plugins/jquery-notific8/jquery.notific8.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/Layout/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css" rel="stylesheet" />
+    <link href="~/Content/Layout/global/plugins/jquery-minicolors/jquery.minicolors.css" rel="stylesheet" />
+    <link href="~/Content/Layout/global/plugins/jquery-tags-input/jquery.tagsinput.css" rel="stylesheet" />
+    <link href="~/Content/Layout/global/plugins/webuploader/webuploader.css" rel="stylesheet" />
+    <link href="~/Content/Layout/global/plugins/UMEditor/themes/default/css/umeditor.min.css" rel="stylesheet" />
+    <link href="~/Content/Layout/global/plugins/bootstrap-tree/css/jstree.min.css" rel="stylesheet" />
+    <!-- END GLOBAL MANDATORY STYLES -->
+    <!-- BEGIN THEME STYLES -->
+    <link href="~/Content/Layout/global/plugins/select2/select2.css" rel="stylesheet" />
+    <link href="~/Content/Layout/global/plugins/select2/bootstrap-select.min.css" rel="stylesheet" />
+    <link href="~/Content/Layout/global/plugins/select2/multi-select.css" rel="stylesheet" />
+    <link href="~/content/layout/global/css/components-rounded.css" id="style_components" rel="stylesheet" type="text/css" />
+    <link href="~/Content/Layout/global/css/components.css" rel="stylesheet" />
+    <link href="~/content/layout/global/css/plugins.css" rel="stylesheet" type="text/css" />
+    <link href="~/content/layout/admin/css/layout.css" rel="stylesheet" type="text/css" />
+    <link href="~/content/Style/custom.css" rel="stylesheet" type="text/css" />
+    <link id="style_color" href="~/content/layout/admin/css/themes/default.css" rel="stylesheet" type="text/css" />
+    @*<link href="~/Content/Layout/global/plugins/bootstrap-timepicker/css/bootstrap-timepicker.min.css" rel="stylesheet" />*@
+    <link href="~/Content/Layout/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <!-- END THEME STYLES -->
+
+    <link rel="shortcut icon" href="favicon.ico" />
+    <script src="~/content/Scripts/jquery.js" type="text/javascript"></script>
+
+    <style>
+        .page-content {
+            padding-top: 5px !important;
+        }
+
+            .page-content .portlet-title .caption {
+                font-size: 13px !important;
+            }
+
+            .page-content .portlet-title {
+                border-bottom-color: #ddd;
+            }
+    </style>
+    @RenderSection("style", false)
+    <!--多选-->
+
+    <script src="~/Content/Layout/global/plugins/select2/bootstrap-select.min.js"></script>
+    <script src="~/Content/Layout/global/plugins/select2/jquery.multi-select.js"></script>
+    <script src="~/Content/Layout/global/plugins/select2/select2.min.js"></script>
+
+    <script src="~/Content/Layout/pages/scripts/components-dropdowns.js"></script>
+    <script type="text/javascript" src="~/content/Scripts/lightbox.js"></script>
+    <link rel="stylesheet" href="~/content/Style/lightbox.css" type="text/css" media="screen">
+    <!--end-->
+    <script>
+
+        function get_cookie(Name) {
+            var search = Name + "="//查询检索的值
+            var returnvalue = "";//返回值
+            if (document.cookie.length > 0) {
+                sd = document.cookie.indexOf(search);
+                if (sd != -1) {
+                    sd += search.length;
+                    end = document.cookie.indexOf(";", sd);
+                    if (end == -1)
+                        end = document.cookie.length;
+                    //unescape() 函数可对通过 escape() 编码的字符串进行解码。
+                    returnvalue = unescape(document.cookie.substring(sd, end))
+                }
+            }
+            return returnvalue;
+        }
+
+
+        //判断cookie 是否需要刷新权限
+        if (get_cookie("Storage") !== "") {
+            $.ajax({
+                type: 'POST',
+                async: false,
+                url: '/Home/LoadStorageAjax',
+                data: {}
+            }).done(function (data) {
+                console.log(data);
+                window.localStorage.setItem('alphaMenu', data);
+            });
+        }
+
+    </script>
+</head>
+<!-- END HEAD -->
+<!-- BEGIN BODY -->
+<!-- DOC: Apply "page-header-fixed-mobile" and "page-footer-fixed-mobile" class to body element to force fixed header or footer in mobile devices -->
+<!-- DOC: Apply "page-sidebar-closed" class to the body and "page-sidebar-menu-closed" class to the sidebar menu element to hide the sidebar by default -->
+<!-- DOC: Apply "page-sidebar-hide" class to the body to make the sidebar completely hidden on toggle -->
+<!-- DOC: Apply "page-sidebar-closed-hide-logo" class to the body element to make the logo hidden on sidebar toggle -->
+<!-- DOC: Apply "page-sidebar-hide" class to body element to completely hide the sidebar on sidebar toggle -->
+<!-- DOC: Apply "page-sidebar-fixed" class to have fixed sidebar -->
+<!-- DOC: Apply "page-footer-fixed" class to the body element to have fixed footer -->
+<!-- DOC: Apply "page-sidebar-reversed" class to put the sidebar on the right side -->
+<!-- DOC: Apply "page-full-width" class to the body element to have full width page without the sidebar menu -->
+<body class="page-header-fixed  page-sidebar-closed-hide-logo page-header-fixed-mobile page-sidebar-fixed">
+    <!-- BEGIN HEADER -->
+    @{Html.RenderPartial("~/Views/Shared/_Header.cshtml"); }
+    <!-- END HEADER -->
+    <div class="clearfix">
+    </div>
+    <!-- BEGIN CONTAINER -->
+    <div class="page-container">
+        <!-- BEGIN SIDEBAR -->
+        <div class="page-sidebar-wrapper">
+            <!-- DOC: Set data-auto-scroll="false" to disable the sidebar from auto scrolling/focusing -->
+            <!-- DOC: Change data-auto-speed="200" to adjust the sub menu slide up/down speed -->
+            <div class="page-sidebar navbar-collapse collapse">
+                <!-- BEGIN SIDEBAR MENU -->
+                @{ Html.RenderPartial("~/Views/Shared/_Sidebar.cshtml");  }
+                <!-- END SIDEBAR MENU -->
+            </div>
+        </div>
+        <!-- END SIDEBAR -->
+        <!-- BEGIN CONTENT -->
+
+        <div class="page-content-wrapper">
+            <div class="page-content">
+                <!-- BEGIN PAGE HEADER-->
+                <!-- END PAGE HEADER-->
+                <!-- BEGIN PAGE CONTENT-->
+                <div class="row">
+                    <div class="col-md-12 margin-top-20">
+                        @RenderBody()
+                    </div>
+                </div>
+                <!-- END PAGE CONTENT-->
+            </div>
+        </div>
+        <!-- END CONTENT -->
+        <!-- BEGIN QUICK SIDEBAR -->
+        <!--Cooming Soon...-->
+        <!-- END QUICK SIDEBAR -->
+    </div>
+    <!-- END CONTAINER -->
+    <!-- BEGIN FOOTER -->
+    <div class="page-footer">
+        <div class="page-footer-inner">
+            @DateTime.Now.Year &copy; ，建议使用谷歌浏览器 <a href="http://w.x.baidu.com/alading/anquan_soft_down_ub/14744" target="_blank">chrome</a> 以获取最佳浏览效果
+        </div>
+        <div class="scroll-to-top">
+            <i class="icon-arrow-up"></i>
+        </div>
+    </div>
+    <!-- END FOOTER -->
+    <!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
+    <!-- BEGIN CORE PLUGINS -->
+    <!--[if lt IE 9]>
+    <script src="~/content/layout/global/plugins/respond.min.js"></script>
+    <script src="~/content/layout/global/plugins/excanvas.min.js"></script>
+    <![endif]-->
+    @*<script src="~/content/layout/global/plugins/jquery.min.js" type="text/javascript"></script>*@
+    <script src="~/content/layout/global/plugins/jquery-migrate.min.js" type="text/javascript"></script>
+    <!-- IMPORTANT! Load jquery-ui.min.js before bootstrap.min.js to fix bootstrap tooltip conflict with jquery ui tooltip -->
+    <script src="~/content/layout/global/plugins/jquery-ui/jquery-ui.min.js" type="text/javascript"></script>
+    <script src="~/content/layout/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="~/content/layout/global/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js" type="text/javascript"></script>
+    <script src="~/content/layout/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+    <script src="~/content/layout/global/plugins/jquery.blockui.min.js" type="text/javascript"></script>
+    <script src="~/content/layout/global/plugins/jquery.cokie.min.js" type="text/javascript"></script>
+    <script src="~/content/layout/global/plugins/uniform/jquery.uniform.min.js" type="text/javascript"></script>
+    <script src="~/content/layout/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>
+    <script src="~/content/layout/global/plugins/bootbox/bootbox.min.js" type="text/javascript"></script>
+    <script src="~/content/layout/global/plugins/bootstrap-modal/js/bootstrap-modalmanager.js" type="text/javascript"></script>
+    <script src="~/content/layout/global/plugins/bootstrap-modal/js/bootstrap-modal.js" type="text/javascript"></script>
+    <script src="~/Content/Layout/global/plugins/jquery-validation/js/jquery.validate.min.js" type="text/javascript"></script>
+    <script src="~/Content/Layout/global/plugins/jquery-validation/js/jquery.validate.unobtrusive.min.js" type="text/javascript"></script>
+    @*<script src="~/Content/Layout/global/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js" type="text/javascript"></script>
+        <script src="~/Content/Layout/global/plugins/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js" type="text/javascript"></script>*@
+    <script src="/Content/Layout/global/plugins/eonasdan-bootstrap-datetimepicker/js/moment-with-locales.js" type="text/javascript"></script>
+    <script src="/Content/Layout/global/plugins/eonasdan-bootstrap-datetimepicker/js/bootstrap-datetimepicker.js" type="text/javascript"></script>
+    <script src="~/Content/Layout/global/plugins/jquery-notific8/jquery.notific8.min.js" type="text/javascript"></script>
+    <script src="~/Content/Layout/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js"></script>
+    <script src="~/Content/Layout/global/plugins/jquery-minicolors/jquery.minicolors.min.js"></script>
+    <script src="~/Content/Layout/global/plugins/jquery-tags-input/jquery.tagsinput.min.js"></script>
+    <script src="~/Content/Layout/global/plugins/webuploader/webuploader.min.js"></script>
+    <script src="~/Content/Layout/global/plugins/UMEditor/umeditor.config.js"></script>
+    <script src="~/Content/Layout/global/plugins/UMEditor/umeditor.min.js"></script>
+    <script src="~/Content/Layout/global/plugins/UMEditor/lang/zh-cn/zh-cn.js"></script>
+    <script src="~/Content/Layout/global/plugins/bootstrap-tree/js/jstree.js"></script>
+    <!-- END CORE PLUGINS -->
+    <script src="~/content/layout/global/scripts/metronic.js" type="text/javascript"></script>
+    <script src="~/content/layout/admin/scripts/layout.js" type="text/javascript"></script>
+    <script src="~/Content/Layout/global/plugins/jquery.form.js" type="text/javascript"></script>
+    <script src="~/Content/Scripts/app.js?v=20160322" type="text/javascript"></script>
+    <script src="~/Content/Layout/global/plugins/bootstrap-timepicker/js/bootstrap-timepicker.min.js"></script>
+    <script src="~/Content/Layout/pages/scripts/components-pickers.js"></script>
+    <script src="~/Content/Scripts/componentsFormTools.js"></script>
+    <script>
+        jQuery(document).ready(function () {
+            $("input[type='text']").bind("blur", function () {
+                var result = $(this).attr("value").replace(/(^\s*)|(\s*$)/g, "");
+                $(this).attr("value", result);
+            });
+            Metronic.init();
+            Layout.init();
+            App.Init();
+            ComponentsFormTools.init();
+
+
+        });
+
+    </script>
+    <!-- 点击行变色 -->
+    <script src="~/Content/Scripts/rowBackgroundColorChanged.js" type="text/javascript"></script>
+    <!-- END JAVASCRIPTS -->
+    @RenderSection("footer", false)
+</body>
+
+<!-- END BODY -->
+</html>

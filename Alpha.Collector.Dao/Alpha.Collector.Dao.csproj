@@ -64,20 +64,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App\SysDbBackupApp.cs" />
-    <Compile Include="App\SysFilterIPApp.cs" />
-    <Compile Include="App\SysAreaApp.cs" />
-    <Compile Include="App\SysDutyApp.cs" />
-    <Compile Include="App\SysItemsApp.cs" />
-    <Compile Include="App\SysItemsDetailApp.cs" />
-    <Compile Include="App\SysModuleApp.cs" />
-    <Compile Include="App\SysModuleButtonApp.cs" />
-    <Compile Include="App\SysOrganizeApp.cs" />
-    <Compile Include="App\SysRoleApp.cs" />
-    <Compile Include="App\SysRoleAuthorizeApp.cs" />
-    <Compile Include="App\SysLogApp.cs" />
-    <Compile Include="App\SysUserApp.cs" />
-    <Compile Include="App\SysUserLogOnApp.cs" />
+    <Compile Include="App\DataSourceApp.cs" />
+    <Compile Include="App\LotteryApp.cs" />
     <Compile Include="Mysql\ConnectionFactory.cs" />
     <Compile Include="App\AppLogApp.cs" />
     <Compile Include="Mysql\MysqlHelper.cs" />

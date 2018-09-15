@@ -1,14 +1,13 @@
 ﻿using Alpha.Collector.Model;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Alpha.Collector.Core
 {
     /// <summary>
     /// 168开奖网广西快乐十分采集器
     /// </summary>
-    public class _168GXKLSFPicker : IPicker
+    public class _168GXKLSFPicker :BasePicker, IPicker,IGXKLSFPicker
     {
         /// <summary>
         /// 采集地址
@@ -22,33 +21,33 @@ namespace Alpha.Collector.Core
         {
             try
             {
-                _168Picker<_168Data> picker = new _168Picker<_168Data>(URL, LotteryType.GXKLSF);
-                List<_168Data> dataList = picker.Pick();
-
-                return (from o in dataList
-                        select new OpenResult
-                        {
-                            create_time = DateTime.Now,
-                            open_time = DateTime.Parse(o.preDrawTime),
-                            lottery_code = LotteryType.GXKLSF,
-                            issue_number = Convert.ToInt64(o.preDrawIssue),
-                            open_data = o.preDrawCode,
-                            data_source = DataSource._168
-                        }).OrderBy(o => o.issue_number).ToList();
+                _168Picker picker = new _168Picker(URL, LotteryEnum.GXKLSF);
+                return picker.Pick();
             }
             catch (Exception ex)
             {
                 AppLog appLog = new AppLog
                 {
                     create_time = DateTime.Now,
-                    log_type = LogType.ERROR,
-                    lottery_code = LotteryType.GXKLSF,
-                    data_source = DataSource._168,
+                    log_type = LogTypeEnum.ERROR,
+                    lottery_code = LotteryEnum.GXKLSF,
+                    data_source = DataSourceEnum._168,
                     log_message = ex.ToString()
                 };
                 AlphaLogManager.Error(appLog);
 
                 return new List<OpenResult>();
+            }
+        }
+
+        /// <summary>
+        /// 是否有效
+        /// </summary>
+        public bool IsValid
+        {
+            get
+            {
+                return base.LotteryList.Contains(LotteryEnum.GXKLSF) && base.DataSourceList.Contains(DataSourceEnum._168);
             }
         }
     }

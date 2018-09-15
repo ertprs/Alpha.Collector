@@ -1,0 +1,82 @@
+﻿*[permid]{ display:none}
+.checkbox-inline, .radio-inline{
+    margin-left:0px;
+    padding-left:0px;
+}
+.radio-inline+.radio-inline{
+    margin-left:0px
+}
+.field-validation-error{
+    padding-top:15px;
+    color:#EE5859;
+}
+.input-validation-error{
+    border-color:#EE5859 !important;
+}
+.valid{
+    border-color:#2BAAA1 !important;
+}
+.login-form .field-validation-error,.login-form .field-validation-valid{
+    font-family:'Microsoft YaHei';
+    font-size:13px;
+    color:#ffd800;
+}
+.login-form .field-validation-error span,.login-form .field-validation-valid span{
+    margin-top:5px !important;
+    display:block !important;
+}
+.login-form .input-validation-error{
+    border-color:#e5e5e5;
+}
+.login-form .valid, .login-form .input-validation-error{
+    border-color:#e5e5e5 !important;
+}
+.table a.last{ margin-right:0px}
+
+.login-form .validation-summary-errors{
+    margin:0px;
+    padding:10px;
+    font-family:'Microsoft YaHei';
+    font-size:14px;
+    text-align:center;
+}
+.login-form .validation-summary-errors ul{ margin:0px; padding:0px; list-style: none}
+.modal-footer{ background-color:#f7f7f7; }
+.gridpager .form-control, .gridpager .btn{ font-size:13px !important; line-height:18px !important; height:32px }
+.bg-f7{ background:#f7f7f7 !important}
+.bg-f1{ background:#f1f1f1 !important}
+
+.form-inline label{ font-family:'Microsoft YaHei'; font-size:14px;}
+
+.jquery-notific8-notification {
+    filter:alpha(opacity=50);
+	-moz-opacity:0.7;
+	-khtml-opacity: 0.7;
+	opacity: 0.7;
+
+    border-bottom-left-radius:8px;
+    border-top-left-radius:8px;
+
+    font-family:'Microsoft YaHei';
+    font-size:13px;
+}
+
+.jquery-notific8-close{
+    padding:7px 10px 7px 10px;
+}
+
+.jquery-notific8-heading{
+    font-size:13px;
+}
+
+.jquery-notific8-message{
+    font-size:14px;
+}
+.myStyleOver{
+    overflow-x: scroll; 
+    overflow-y: hidden; 
+    margin:0px;
+    padding:0px;
+
+}
+.table th{ background:#f7f7f7 !important}

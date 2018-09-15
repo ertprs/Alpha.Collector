@@ -33,13 +33,14 @@
             // 
             // serviceProcessInstaller1
             // 
+            this.serviceProcessInstaller1.Account = System.ServiceProcess.ServiceAccount.LocalSystem;
             this.serviceProcessInstaller1.Password = null;
             this.serviceProcessInstaller1.Username = null;
             // 
             // serviceInstaller1
             // 
             this.serviceInstaller1.Description = "Alpha 开奖结果采集服务";
-            this.serviceInstaller1.DisplayName = "Alpha.Collector.Service";
+            this.serviceInstaller1.DisplayName = "Alpha Collector Service";
             this.serviceInstaller1.ServiceName = "Alpha.Collector.Service";
             this.serviceInstaller1.StartType = System.ServiceProcess.ServiceStartMode.Automatic;
             // 

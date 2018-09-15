@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using System.Threading.Tasks;
 
 namespace Alpha.Collector.Core
@@ -20,24 +19,28 @@ namespace Alpha.Collector.Core
         public abstract IPicker GetPicker(string dataSource);
 
         /// <summary>
+        /// 获取采集器集合
+        /// </summary>
+        /// <returns></returns>
+        public abstract List<IPicker> GetPickerList();
+
+        /// <summary>
         /// 执行抓取
         /// </summary>
         /// <param name="taskCount">线程数量</param>
-        List<OpenResult> IPickerManager.DoPick(int taskCount)
+        public List<OpenResult> DoPick(int taskCount)
         {
-            Type type = typeof(DataSource);
-            List<FieldInfo> fieldInfo = type.GetFields().ToList();
+            List<IPicker> pickerList = this.GetPickerList();
+            if (pickerList.Count == 0)
+            {
+                return new List<OpenResult>();
+            }
 
             List<OpenResult> list = new List<OpenResult>();
-            ParallelOptions option = new ParallelOptions { MaxDegreeOfParallelism = Math.Min(taskCount, fieldInfo.Count) };
-            Parallel.ForEach(fieldInfo, option, field =>
+            ParallelOptions option = new ParallelOptions { MaxDegreeOfParallelism = Math.Min(taskCount, pickerList.Count) };
+            Parallel.ForEach(pickerList, option, picker =>
             {
-                string dataSource = field.GetValue(null).ToString();
-                IPicker picker = this.GetPicker(dataSource);
-                if (picker != null)
-                {
-                    list.AddRange(picker.Run());
-                }
+                list.AddRange(picker.Run());
             });
 
             list = DistinctEx(list);

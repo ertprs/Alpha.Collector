@@ -1,0 +1,79 @@
+﻿@using Alpha.Collector.Model;
+@using Alpha.Collector.Web;
+@model Query<Lottery, LotteryParams>
+
+<div class="myStyleOver">
+    <div style="overflow-x: auto; white-space: nowrap;">
+        <table class="table  table-striped  table-hover loading table-bordered margin-bottom-5">
+            <thead>
+                <tr>
+                    <th width="30">#</th>
+                    <th width="30"><input type="checkbox" selectall="true" /></th>
+                    <th width="60">操作</th>
+                    <th>创建时间</th>
+                    <th>更新时间</th>
+                    <th>彩种名称</th>
+                    <th>彩种代码</th>
+                    <th title="有效 / 总">采集器数</th>
+                    <th>今日抓取数</th>
+                    <th>总抓取数</th>
+                    <th>状态</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{ var index = 0; string codeList = string.Empty; }
+                @foreach (var item in Model.ItemList)
+                {
+                    codeList += item.code + ",";
+                    <tr>
+                        <td>@Model.RowNumber(++index)</td>
+                        <td><input type="checkbox" value="@item.id" selectitem="true" name="idList" /></td>
+                        <td>
+                            @{
+                                if (item.status == 1)
+                                {
+                                    <a itemId="@item.id" itemName="@item.name" class="stopPick btn btn-xs green"><i class="fa fa-edit"></i> 停止采集</a>
+                                }
+                                else
+                                {
+                                    <a itemId="@item.id" itemName="@item.name" class="startPick btn btn-xs red"><i class="fa fa-edit"></i> 开启采集</a>
+                                }
+                            }
+                            <a itemId="@item.id" itemCode="@item.code" class="showDetail btn purple btn-sm">采集详情</a>
+                        </td>
+                        <td>@item.create_time</td>
+                        <td>@item.update_time</td>
+                        <td>@item.name</td>
+                        <td>@item.code</td>
+                        <td id="picker_count_@item.code">0</td>
+                        <td id="today_count_@item.code">0</td>
+                        <td id="total_count_@item.code">0</td>
+                        <td class="@(item.status == 1 ? "font-green-jungle" :"font-red")">@item.StatusTest</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+<input type="hidden" id="codeList" value="@codeList" />
+@Html.GridPager(Model)
+<script type="text/javascript">
+    $(function () {
+        var codeList = $("#codeList").val();
+        $.ajax({
+            type: "GET",
+            cache: false,
+            url: "/Ajax/GetLotteryPickCount",
+            data: { codeList: codeList },
+            dataType: "json",
+            success: function (res) {
+                $.each(res, function (i, r) {
+                    $("#picker_count_" + r.Code).html(r.ValidPickerCount + " / " + r.TotalPickerCount);
+                    $("#today_count_" + r.Code).html(r.TodayCount);
+                    $("#total_count_" + r.Code).html(r.TotalCount);
+                });
+            },
+        });
+    });
+</script>
+

@@ -27,16 +27,38 @@ namespace Alpha.Collector.Dao
         }
 
         /// <summary>
+        /// 取某一个彩种最新的开奖结果
+        /// </summary>
+        /// <param name="lotteryType"></param>
+        /// <returns></returns>
+        public static List<OpenResult> GetNewestResult(string lotteryType)
+        {
+            string sql = $"select issue_number, open_time, open_data from open_result where lottery_code = '{lotteryType}' group by issue_number order by issue_number desc limit 20";
+            return MysqlHelper.GetList<OpenResult>(sql).ToList();
+        }
+
+        /// <summary>
         /// 判断当前期在数据库是否已经存在
         /// </summary>
         /// <param name="issueNo"></param>
         /// <returns></returns>
         private static bool Exists(long issueNo, string lotteryCode, string dataSource)
         {
-            string sql = "select * from open_result where issue_number = {0} and lottery_code = '{1}' and data_source = '{2}'";
-            sql = string.Format(sql, issueNo, lotteryCode, dataSource);
+            string sql = $"select * from open_result where issue_number = {issueNo} and lottery_code = '{lotteryCode}' and data_source = '{dataSource}'";
             OpenResult o = MysqlHelper.GetOne<OpenResult>(sql);
             return o != null && o.id > 0;
+        }
+
+        /// <summary>
+        /// 清除指定时间之前的开奖结果
+        /// </summary>
+        /// <param name="timestamp"></param>
+        /// <returns></returns>
+        public static int Delete(long timestamp)
+        {
+            string sql = "detele from open_result where create_timestamp < {0}";
+            sql = string.Format(sql, timestamp);
+            return MysqlHelper.Execute(sql);
         }
     }
 }

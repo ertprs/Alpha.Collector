@@ -29,7 +29,7 @@ namespace Alpha.Collector.Utils
                 {
                     result = GetWebClientIp();
                 }
-                if (result.IsEmpty())
+                if (result.IsNullOrEmpty())
                 {
                     result = GetLanIp();
                 }

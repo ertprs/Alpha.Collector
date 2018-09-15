@@ -29,7 +29,7 @@ namespace Alpha.Collector.Core
         /// 执行抓取
         /// </summary>
         /// <returns></returns>
-        public List<OpenResult> DoPick()
+        public List<OpenResult> Pick()
         {
             string json = HttpHelper.HttpGet(this._url);
             List<BiFaResponse> responseList = JsonHelper.ToEntity<List<BiFaResponse>>(json);
@@ -41,7 +41,7 @@ namespace Alpha.Collector.Core
                         lottery_code = this._lotteryType,
                         issue_number = Convert.ToInt64(r.turnNum),
                         open_data = r.openNum,
-                        data_source = DataSource.ROBO
+                        data_source = DataSourceEnum.BiFa
                     }).OrderBy(o => o.issue_number).ToList();
         }
     }

@@ -24,22 +24,22 @@ namespace Alpha.Collector.Core
             this._url = string.Format(URL, lotteryCode);
             this._lotteryType = lotteryCode;
 
-            if (lotteryCode == LotteryType.HNKLSF)
+            if (lotteryCode == LotteryEnum.HNKLSF)
             {
                 this._url = string.Format(URL, "hunanklsf");
             }
 
-            if (lotteryCode == LotteryType.JSK3)
+            if (lotteryCode == LotteryEnum.JSK3)
             {
                 this._url = string.Format(URL, "nmk3");
             }
 
-            if (lotteryCode == LotteryType.HuBK3)
+            if (lotteryCode == LotteryEnum.HuBK3)
             {
                 this._url = string.Format(URL, "hbk3");
             }
 
-            if (lotteryCode == LotteryType.XGLHC)
+            if (lotteryCode == LotteryEnum.XGLHC)
             {
                 this._url = string.Format(URL, "lhc");
             }
@@ -51,6 +51,9 @@ namespace Alpha.Collector.Core
         /// <returns></returns>
         public List<OpenResult> Pick()
         {
+            //TODO:乐博有问题暂时
+            return new List<OpenResult>();
+
             string json = HttpHelper.HttpGet(this._url);
             RoboResponse response = JsonHelper.ToEntity<RoboResponse>(json);
             if (!response.Success)
@@ -66,7 +69,7 @@ namespace Alpha.Collector.Core
                         lottery_code = this._lotteryType,
                         issue_number = Convert.ToInt64(r.formatStage),
                         open_data = r.result,
-                        data_source = DataSource.ROBO
+                        data_source = DataSourceEnum.Robo
                     }).OrderBy(o => o.issue_number).ToList();
         }
     }

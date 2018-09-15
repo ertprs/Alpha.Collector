@@ -1,5 +1,6 @@
-﻿using Alpha.Collector.Model;
+﻿using Alpha.Collector.Utils;
 using System;
+using System.Collections.Generic;
 
 namespace Alpha.Collector.Core
 {
@@ -9,25 +10,59 @@ namespace Alpha.Collector.Core
     public class FC3DPickerManager : PickerManager
     {
         /// <summary>
+        /// 获取采集器列表
+        /// </summary>
+        /// <returns></returns>
+        public override List<IPicker> GetPickerList()
+        {
+            List<Type> list = ReflectionHelper.GetClasses<IFC3DPicker>();
+            List<IPicker> pickerList = new List<IPicker>();
+            foreach (Type type in list)
+            {
+                try
+                {
+                    IFC3DPicker picker = Activator.CreateInstance(type) as IFC3DPicker;
+                    if (picker != null && picker.IsValid)
+                    {
+                        pickerList.Add(picker);
+                    }
+
+                }
+                catch (Exception ex)
+                {
+
+                }
+            }
+
+            return pickerList;
+        }
+
+        /// <summary>
         /// 获取采集器
         /// </summary>
         /// <param name="dataSource"></param>
         /// <returns></returns>
         public override IPicker GetPicker(string dataSource)
         {
-            switch (dataSource)
+            List<Type> list = ReflectionHelper.GetClasses<IFC3DPicker>();
+            foreach (Type type in list)
             {
-                case DataSource._168:
-                    return (IPicker)Activator.CreateInstance(typeof(_168FC3DPicker));
-                case DataSource.KCZX:
-                    return (IPicker)Activator.CreateInstance(typeof(KCFC3DPicker));
-                case DataSource.ROBO:
-                    return (IPicker)Activator.CreateInstance(typeof(RoboFC3DPicker));
-                case DataSource.BiFa:
-                    return (IPicker)Activator.CreateInstance(typeof(BiFaFC3DPicker));
-                default:
+                try
+                {
+                    IFC3DPicker picker = Activator.CreateInstance(type) as IFC3DPicker;
+                    if (picker != null && type.Name.ToLower().Contains(dataSource.ToLower()))
+                    {
+                        return picker;
+                    }
+
+                }
+                catch (Exception ex)
+                {
                     return null;
+                }
             }
+
+            return null;
         }
     }
 }

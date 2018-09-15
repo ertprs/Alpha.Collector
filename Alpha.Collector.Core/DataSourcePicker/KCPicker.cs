@@ -33,53 +33,53 @@ namespace Alpha.Collector.Core
         {
             switch (lotteryType)
             {
-                case LotteryType.CQSSC:
+                case LotteryEnum.CQSSC:
                     return 1000;
-                case LotteryType.TJSSC:
+                case LotteryEnum.TJSSC:
                     return 1003;
-                case LotteryType.XJSSC:
+                case LotteryEnum.XJSSC:
                     return 1001;
 
-                case LotteryType.JSK3:
+                case LotteryEnum.JSK3:
                     return 1401;
-                case LotteryType.AHK3:
+                case LotteryEnum.AHK3:
                     return 1402;
-                case LotteryType.GXK3:
+                case LotteryEnum.GXK3:
                     return 1404;
-                case LotteryType.HuBK3:
+                case LotteryEnum.HuBK3:
                     return 1405;
-                case LotteryType.BJK3:
+                case LotteryEnum.BJK3:
                     return 1406;
-                case LotteryType.HeBK3:
+                case LotteryEnum.HeBK3:
                     return 1408;
-                case LotteryType.GSK3:
+                case LotteryEnum.GSK3:
                     return 1411;
-                case LotteryType.SHK3:
+                case LotteryEnum.SHK3:
                     return 1410;
-                case LotteryType.GZK3:
+                case LotteryEnum.GZK3:
                     return 1409;
-                case LotteryType.JLK3:
+                case LotteryEnum.JLK3:
                     return 1404;
 
-                case LotteryType.BJKL8:
+                case LotteryEnum.BJKL8:
                     return 1302;
-                case LotteryType.BJKC:
+                case LotteryEnum.BJKC:
                     return 1303;
-                case LotteryType.XGLHC:
+                case LotteryEnum.XGLHC:
                     return 1301;
 
-                case LotteryType.GD11X5:
+                case LotteryEnum.GD11X5:
                     return 1100;
-                case LotteryType.SH11X5:
+                case LotteryEnum.SH11X5:
                     return 1101;
-                case LotteryType.SD11X5:
+                case LotteryEnum.SD11X5:
                     return 1102;
-                case LotteryType.JX11X5:
+                case LotteryEnum.JX11X5:
                     return 1103;
 
-                case LotteryType.FC3D:
+                case LotteryEnum.FC3D:
                     return 1201;
-                case LotteryType.TCPL3:
+                case LotteryEnum.TCPL3:
                     return 1202;
 
                 default:
@@ -99,7 +99,7 @@ namespace Alpha.Collector.Core
             string html = HttpHelper.GetHtml(param, ref errorInfo);
             if (!string.IsNullOrEmpty(errorInfo))
             {
-                throw new Exception($"从快彩在线采集{this._lotteryType}出错。错误信息：{errorInfo}，抓取地址：{param.Url}");
+                throw new Exception($"从快彩在线采集{this._lotteryType}出错。错误信息：{errorInfo} 抓取地址：{param.Url}");
             }
 
             if (string.IsNullOrEmpty(html))
@@ -131,7 +131,7 @@ namespace Alpha.Collector.Core
                         lottery_code = _lotteryType,
                         issue_number = Convert.ToInt64(o.IssueNo),
                         open_data = o.LotteryOpen,
-                        data_source = DataSource.KCZX
+                        data_source = DataSourceEnum.KC
                     }).OrderBy(o => o.issue_number).ToList();
         }
 

@@ -7,13 +7,13 @@ namespace Alpha.Collector.Core
     /// <summary>
     /// 快彩在线抓取新疆时时彩
     /// </summary>
-    internal class KCXJSSCPicker : IPicker
+    internal class KCXJSSCPicker : BasePicker, IPicker, IXJSSCPicker
     {
         private KCPicker _kcPicker;
 
         public KCXJSSCPicker()
         {
-            this._kcPicker = new KCPicker(LotteryType.XJSSC);
+            this._kcPicker = new KCPicker(LotteryEnum.XJSSC);
         }
 
         /// <summary>
@@ -31,14 +31,25 @@ namespace Alpha.Collector.Core
                 AppLog appLog = new AppLog
                 {
                     create_time = DateTime.Now,
-                    log_type = LogType.ERROR,
-                    lottery_code = LotteryType.XJSSC,
-                    data_source = DataSource.KCZX,
+                    log_type = LogTypeEnum.ERROR,
+                    lottery_code = LotteryEnum.XJSSC,
+                    data_source = DataSourceEnum.KC,
                     log_message = ex.ToString()
                 };
                 AlphaLogManager.Error(appLog);
 
                 return new List<OpenResult>();
+            }
+        }
+
+        /// <summary>
+        /// 是否有效
+        /// </summary>
+        public bool IsValid
+        {
+            get
+            {
+                return base.LotteryList.Contains(LotteryEnum.XJSSC) && base.DataSourceList.Contains(DataSourceEnum.KC);
             }
         }
     }

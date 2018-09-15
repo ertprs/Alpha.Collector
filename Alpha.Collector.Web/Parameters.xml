@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<parameters>
+  <parameter name="QD.Models.CarInsurance-Web.config Connection String"
+      description="QD.Models.CarInsurance"
+      defaultValue="Server=tcp:x.database.windows.net,1433;Database=x_db;User ID=x@y;Password=z;Trusted_Connection=False;etc." tags="" />
+
+  <parameter name="QD.Models.CarLoan-Web.config Connection String"
+      description="QD.Models.CarLoan"
+      defaultValue="Server=tcp:x.database.windows.net,1433;Database=x_db;User ID=x@y;Password=z;Trusted_Connection=False;etc." tags="" />
+
+  <parameter name="QD.Models.Credit-Web.config Connection String"
+      description="QD.Models.Credit"
+      defaultValue="Server=tcp:x.database.windows.net,1433;Database=x_db;User ID=x@y;Password=z;Trusted_Connection=False;etc." tags="" />
+
+  <parameter name="QD.Models.Project-Web.config Connection String"
+      description="QD.Models.Project"
+      defaultValue="Server=tcp:x.database.windows.net,1433;Database=x_db;User ID=x@y;Password=z;Trusted_Connection=False;etc." tags="" />
+
+  <parameter name="QD.Models.PushMessage-Web.config Connection String"
+      description="QD.Models.PushMessage"
+      defaultValue="Server=tcp:x.database.windows.net,1433;Database=x_db;User ID=x@y;Password=z;Trusted_Connection=False;etc." tags="" />
+
+  <parameter name="QD.Models.QianDuan_Mall-Web.config Connection String"
+      description="QD.Models.QianDuan_Mall"
+      defaultValue="Server=tcp:x.database.windows.net,1433;Database=x_db;User ID=x@y;Password=z;Trusted_Connection=False;etc." tags="" />
+
+  <parameter name="QD.Models.QianDuan_Mall_ReadOnly-Web.config Connection String"
+      description="QD.Models.QianDuan_Mall_ReadOnly"
+      defaultValue="Server=tcp:x.database.windows.net,1433;Database=x_db;User ID=x@y;Password=z;Trusted_Connection=False;etc." tags="" />
+
+  <parameter name="QD.Models.QianTu-Web.config Connection String"
+      description="QD.Models.QianTu"
+      defaultValue="Server=tcp:x.database.windows.net,1433;Database=x_db;User ID=x@y;Password=z;Trusted_Connection=False;etc." tags="" />
+
+  <parameter name="QD.Models.QianTu_LC-Web.config Connection String"
+      description="QD.Models.QianTu_LC"
+      defaultValue="Server=tcp:x.database.windows.net,1433;Database=x_db;User ID=x@y;Password=z;Trusted_Connection=False;etc." tags="" />
+
+  <parameter name="QD.Models.QianTu_MC-Web.config Connection String"
+      description="QD.Models.QianTu_MC"
+      defaultValue="Server=tcp:x.database.windows.net,1433;Database=x_db;User ID=x@y;Password=z;Trusted_Connection=False;etc." tags="" />
+
+  <parameter name="QD.Models.Qt_Msg-Web.config Connection String"
+      description="QD.Models.Qt_Msg"
+      defaultValue="Server=tcp:x.database.windows.net,1433;Database=x_db;User ID=x@y;Password=z;Trusted_Connection=False;etc." tags="" />
+
+  <parameter name="QD.Models.System-Web.config Connection String"
+      description="QD.Models.System"
+      defaultValue="Server=tcp:x.database.windows.net,1433;Database=x_db;User ID=x@y;Password=z;Trusted_Connection=False;etc." tags="" />
+
+  <parameter name="QD.Models.QianDuan_Finance-Web.config Connection String"
+      description="QD.Models.QianDuan_Finance"
+      defaultValue="Server=tcp:x.database.windows.net,1433;Database=x_db;User ID=x@y;Password=z;Trusted_Connection=False;etc." tags="" />
+
+  <parameter name="QD.Models.Loan-Web.config Connection String"
+      description="QD.Models.Loan"
+      defaultValue="Server=tcp:x.database.windows.net,1433;Database=x_db;User ID=x@y;Password=z;Trusted_Connection=False;etc." tags="" />
+
+  <parameter name="ConnStringCarMerchantSystem-Web.config Connection String"
+     description="QD.Models.CarMerchantSystem"
+     defaultValue="Server=tcp:x.database.windows.net,1433;Database=x_db;User ID=x@y;Password=z;Trusted_Connection=False;etc." tags="" />
+
+</parameters>

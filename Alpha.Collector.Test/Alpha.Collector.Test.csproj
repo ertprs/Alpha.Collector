@@ -77,6 +77,10 @@
       <Project>{5aafb159-3dce-4124-975a-7f4d62fc35c1}</Project>
       <Name>Alpha.Collector.Model</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Alpha.Collector.Service\Alpha.Collector.Service.csproj">
+      <Project>{42876754-0119-4d39-a3e6-8db7cae069e8}</Project>
+      <Name>Alpha.Collector.Service</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Alpha.Collector.Utils\Alpha.Collector.Utils.csproj">
       <Project>{98366994-a207-42fb-bb29-53f88882e654}</Project>
       <Name>Alpha.Collector.Utils</Name>

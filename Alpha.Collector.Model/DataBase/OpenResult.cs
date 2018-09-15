@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Alpha.Collector.Utils;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -26,8 +27,7 @@ namespace Alpha.Collector.Model
         {
             get
             {
-                DateTime startTime = TimeZone.CurrentTimeZone.ToLocalTime(new DateTime(1970, 1, 1));
-                return (long)(this.create_time - startTime).TotalMilliseconds;
+                return this.create_time.ToTimestamp();
             }
         }
 
@@ -67,7 +67,17 @@ namespace Alpha.Collector.Model
             get
             {
                 List<string> numList = this._open_data.Split(',').ToList();
-                return numList.Aggregate(string.Empty, (c, r) => c + r.Trim().TrimStart('0') + ',').TrimEnd(',');
+                return numList.Aggregate(string.Empty, (c, r) =>
+                {
+                    if (r.Trim().TrimStart('0') == "")
+                    {
+                        return c + r.Trim() + ',';
+                    }
+                    else
+                    {
+                        return c + r.Trim().TrimStart('0') + ',';
+                    }
+                }).TrimEnd(',');
             }
             set
             {
@@ -81,6 +91,17 @@ namespace Alpha.Collector.Model
         public string data_source { get; set; }
 
         /// <summary>
+        /// 数据源文字表示
+        /// </summary>
+        public string DataSourceText
+        {
+            get
+            {
+                return ModelFunction.GetDataSourceName(this.data_source);
+            }
+        }
+
+        /// <summary>
         /// 开奖号码是否合法
         /// </summary>
         public int is_legal
@@ -92,17 +113,6 @@ namespace Alpha.Collector.Model
         }
 
         /// <summary>
-        /// 是否是合法开奖号码
-        /// </summary>
-        public bool IsLegal
-        {
-            get
-            {
-                return this.CheckLegal();
-            }
-        }
-
-        /// <summary>
         /// 校验当前开奖号码是否合法
         /// </summary>
         /// <returns></returns>
@@ -110,61 +120,64 @@ namespace Alpha.Collector.Model
         {
             switch (this.lottery_code)
             {
-                case LotteryType.AHK3:
-                case LotteryType.BJK3:
-                case LotteryType.FJK3:
-                case LotteryType.GSK3:
-                case LotteryType.GXK3:
-                case LotteryType.GZK3:
-                case LotteryType.HeBK3:
-                case LotteryType.HuBK3:
-                case LotteryType.JLK3:
-                case LotteryType.JSK3:
-                case LotteryType.NMGK3:
-                case LotteryType.SHK3:
+                case LotteryEnum.BJK3:
+                    return this.CheckBJK3Legal();
+
+                case LotteryEnum.AHK3:
+                case LotteryEnum.FJK3:
+                case LotteryEnum.GSK3:
+                case LotteryEnum.GXK3:
+                case LotteryEnum.GZK3:
+                case LotteryEnum.HeBK3:
+                case LotteryEnum.HuBK3:
+                case LotteryEnum.JLK3:
+                case LotteryEnum.JSK3:
+                case LotteryEnum.NMGK3:
+                case LotteryEnum.SHK3:
                     return this.CheckK3Legal();
 
-                case LotteryType.AH11X5:
-                case LotteryType.GD11X5:
-                case LotteryType.GX11X5:
-                case LotteryType.HB11X5:
-                case LotteryType.JL11X5:
-                case LotteryType.JS11X5:
-                case LotteryType.JX11X5:
-                case LotteryType.LN11X5:
-                case LotteryType.NMG11X5:
-                case LotteryType.SD11X5:
-                case LotteryType.SH11X5:
-                case LotteryType.ZJ11X5:
+                case LotteryEnum.AH11X5:
+                case LotteryEnum.GD11X5:
+                case LotteryEnum.GX11X5:
+                case LotteryEnum.HB11X5:
+                case LotteryEnum.JL11X5:
+                case LotteryEnum.JS11X5:
+                case LotteryEnum.JX11X5:
+                case LotteryEnum.LN11X5:
+                case LotteryEnum.NMG11X5:
+                case LotteryEnum.SD11X5:
+                case LotteryEnum.SH11X5:
+                case LotteryEnum.ZJ11X5:
                     return this.Check11X5Legal();
 
-                case LotteryType.CQXYNC:
-                case LotteryType.GDKLSF:
-                case LotteryType.TJKLSF:
+                case LotteryEnum.CQXYNC:
+                case LotteryEnum.GDKLSF:
+                case LotteryEnum.TJKLSF:
+                case LotteryEnum.HNKLSF:
                     return this.CheckKLSFLegal();
 
-                case LotteryType.GXKLSF://TODO:广西快乐十分的期号样式待定
+                case LotteryEnum.GXKLSF://TODO:广西快乐十分的期号样式待定
                     return true;
 
-                case LotteryType.CQSSC:
-                case LotteryType.TJSSC:
-                case LotteryType.XJSSC:
+                case LotteryEnum.CQSSC:
+                case LotteryEnum.TJSSC:
+                case LotteryEnum.XJSSC:
                     return this.CheckSSCLegal();
 
-                case LotteryType.FC3D:
-                case LotteryType.TCPL3:
+                case LotteryEnum.FC3D:
+                case LotteryEnum.TCPL3:
                     return this.CheckFC3DLegal();
 
-                case LotteryType.PCDD:
+                case LotteryEnum.PCDD:
                     return this.CheckPCDDLegal();
 
-                case LotteryType.BJKC:
+                case LotteryEnum.BJKC:
                     return this.CheckKCLegal();
 
-                case LotteryType.BJKL8:
+                case LotteryEnum.BJKL8:
                     return this.CheckBJKL8Legal();
 
-                case LotteryType.XGLHC:
+                case LotteryEnum.XGLHC:
                     return this.CheckLHCLegal();
 
                 default: return false;
@@ -175,10 +188,20 @@ namespace Alpha.Collector.Model
         /// 校验快3开奖号码
         /// </summary>
         /// <returns></returns>
+        private bool CheckBJK3Legal()
+        {
+            return this.Check(false, 3, 1, 6, true);
+        }
+
+        /// <summary>
+        /// 校验快3开奖号码
+        /// </summary>
+        /// <returns></returns>
         private bool CheckK3Legal()
         {
             return this.Check(true, 3, 1, 6, true);
         }
+
 
         /// <summary>
         /// 校验11选5开奖号码
@@ -213,7 +236,7 @@ namespace Alpha.Collector.Model
         /// <returns></returns>
         private bool CheckFC3DLegal()
         {
-            return this.Check(true, 3, 0, 9, false);
+            return this.Check(true, 3, 0, 9, true);
         }
 
         /// <summary>
@@ -269,7 +292,7 @@ namespace Alpha.Collector.Model
         /// <returns></returns>
         private bool Check(bool issueNoContainsDate, int numCount, int minNum, int maxNum, bool canSameNum)
         {
-            if (issueNoContainsDate && !this.issue_number.ToString().Contains(this.open_time.ToString("yyyyMMdd")))
+            if (issueNoContainsDate && !this.issue_number.ToString().Contains(this.open_time.ToString("yyyyMMdd")) && !this.issue_number.ToString().Contains(this.open_time.AddDays(-1).ToString("yyyyMMdd")))
             {
                 return false;
             }
@@ -292,6 +315,5 @@ namespace Alpha.Collector.Model
 
             return true;
         }
-
     }
 }

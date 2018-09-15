@@ -1,0 +1,30 @@
+﻿<!-- DOC: Apply "page-sidebar-menu-light" class right after "page-sidebar-menu" to enable light sidebar menu style(without borders) -->
+<!-- DOC: Apply "page-sidebar-menu-hover-submenu" class right after "page-sidebar-menu" to enable hoverable(hover vs accordion) sub menu mode -->
+<!-- DOC: Apply "page-sidebar-menu-closed" class right after "page-sidebar-menu" to collapse("page-sidebar-closed" class must be applied to the body element) the sidebar sub menu mode -->
+<!-- DOC: Set data-auto-scroll="false" to disable the sidebar from auto scrolling/focusing -->
+<!-- DOC: Set data-keep-expand="true" to keep the submenues expanded -->
+<!-- DOC: Set data-auto-speed="200" to adjust the sub menu slide up/down speed -->
+<script type="text/javascript">
+    //var sidebar = window.localStorage.getItem("alphaMenu");
+    var sidebar = '<li><a href="/OpenResult/List"><i class="icon-support"></i><span class="title">开奖结果</span></a></li>';
+    sidebar += '<li><a href="/AppLog/List" ><i class="icon-note"></i><span class="title">系统日志</span></a></li>';
+    sidebar += '<li><a href="/Lottery/List" ><i class="icon-directions"></i><span class="title">彩种列表</span></a></li>';
+    sidebar += '<li><a href="/DataSource/List" ><i class="icon-calculator"></i><span class="title">数据源列表</span></a></li>';
+    window.document.write('<ul class="page-sidebar-menu page-sidebar-menu-compact sidebar" data-keep-expanded="true" data-auto-scroll="false" data-slide-speed="150">');
+    window.document.write(sidebar);
+    window.document.write('</ul>');
+
+    var currentUrl = window.location.pathname.toLowerCase();
+    if (currentUrl.lastIndexOf('/') == currentUrl.length - 1)
+        currentUrl = currentUrl.substr(0, currentUrl.length - 1);
+
+    if (currentUrl == "") currentUrl = "/";
+
+    var jq = $("ul.sidebar a[href='" + currentUrl + "']").closest("li");
+    jq.addClass("active");
+
+    while (jq.length > 0) {
+        jq = jq.parent("ul").parent("li");
+        jq.addClass("active open");
+    }
+</script>

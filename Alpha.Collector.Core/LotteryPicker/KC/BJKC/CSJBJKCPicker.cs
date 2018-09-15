@@ -7,7 +7,7 @@ namespace Alpha.Collector.Core
     /// <summary>
     /// 彩世界北京PK10抓取工具
     /// </summary>
-    internal class CSJBJKCPicker : IPicker
+    internal class CSJBJKCPicker : BasePicker, IPicker, IBJKCPicker
     {
         /// <summary>
         /// 采集地址
@@ -18,7 +18,7 @@ namespace Alpha.Collector.Core
 
         public CSJBJKCPicker()
         {
-            this._picker = new CSJPicker(URL, LotteryType.BJKC);
+            this._picker = new CSJPicker(URL, LotteryEnum.BJKC);
         }
 
         /// <summary>
@@ -36,14 +36,25 @@ namespace Alpha.Collector.Core
                 AppLog appLog = new AppLog
                 {
                     create_time = DateTime.Now,
-                    log_type = LogType.ERROR,
-                    lottery_code = LotteryType.BJKC,
-                    data_source = DataSource.CSJ,
+                    log_type = LogTypeEnum.ERROR,
+                    lottery_code = LotteryEnum.BJKC,
+                    data_source = DataSourceEnum.CSJ,
                     log_message = ex.ToString()
                 };
                 AlphaLogManager.Error(appLog);
 
                 return new List<OpenResult>();
+            }
+        }
+
+        /// <summary>
+        /// 是否有效
+        /// </summary>
+        public bool IsValid
+        {
+            get
+            {
+                return base.LotteryList.Contains(LotteryEnum.BJKC) && base.DataSourceList.Contains(DataSourceEnum.CSJ);
             }
         }
     }

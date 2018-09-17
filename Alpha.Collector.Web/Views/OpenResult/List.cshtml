@@ -38,7 +38,7 @@
                     <label>开奖时间：</label>@Html.DayTimePickerFor(m => m.Params.StartOpenTime, "开始时间", 2)-@Html.DayTimePickerFor(m => m.Params.EndOpenTime, "结束时间", 2)
                     <label>期号：</label> @Html.TextBoxFor(m => m.Params.IssueNumber, new { @class = "form-control", placeholder = "期号" })
                     <label>是否合法：</label>
-                    <select name="Params.IsLegal" class="form-control input-xsmall" onclick="$('#OpenResultForm').submit();">
+                    <select name="Params.IsLegal" class="form-control input-xsmall" onchange="$('#OpenResultForm').submit();">
                         <option value="" selected="selected">全部</option>
                         <option value="1">是</option>
                         <option value="0">否</option>

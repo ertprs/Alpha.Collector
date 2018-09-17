@@ -24,7 +24,7 @@
                     <tr>
                         <td>@Model.RowNumber(++index)</td>
                         <td><input type="checkbox" value="@item.id" selectitem="true" name="idList" /></td>
-                        <td><a id="showDetail" itemId="@item.id" itemName="@item.log_message" class="btn btn-xs purple"> 日志详情</a></td>
+                        <td><a itemId="@item.id" class="showDetail btn btn-xs purple"> 日志详情</a></td>
                         <td>@item.create_time</td>
                         <td>@ModelFunction.GetLotteryName(item.lottery_code)</td>
                         <td>@item.lottery_code</td>

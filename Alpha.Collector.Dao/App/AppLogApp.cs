@@ -31,5 +31,16 @@ namespace Alpha.Collector.Dao
             sql = string.Format(sql, timestamp);
             return MysqlHelper.Execute(sql);
         }
+
+        /// <summary>
+        /// 根据id获取日志信息
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public static AppLog GetLogById(string id)
+        {
+            string sql = $"select log_message from app_log where id = {id}";
+            return MysqlHelper.GetOne<AppLog>(sql);
+        }
     }
 }

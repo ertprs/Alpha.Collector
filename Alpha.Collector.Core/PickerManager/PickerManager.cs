@@ -9,20 +9,74 @@ namespace Alpha.Collector.Core
     /// <summary>
     /// 采集器管理器
     /// </summary>
-    public abstract class PickerManager : IPickerManager
+    public class PickerManager : IPickerManager
     {
+        private string _lotteryType;
+
+        /// <summary>
+        /// 构造函数
+        /// </summary>
+        /// <param name="lotteryType"></param>
+        public PickerManager(string lotteryType)
+        {
+            this._lotteryType = lotteryType;
+        }
+
         /// <summary>
         /// 获取采集器
         /// </summary>
         /// <param name="dataSource"></param>
         /// <returns></returns>
-        public abstract IPicker GetPicker(string dataSource);
+        public IPicker GetPicker(string dataSource)
+        {
+            List<Type> list = LotteryHelper.GetTypeList(this._lotteryType);
+            foreach (Type type in list)
+            {
+                try
+                {
+                    IPicker picker = Activator.CreateInstance(type) as IPicker;
+                    if (picker != null && type.Name.ToLower().Contains(dataSource.ToLower()))
+                    {
+                        return picker;
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    return null;
+                }
+            }
+
+            return null;
+        }
 
         /// <summary>
         /// 获取采集器集合
         /// </summary>
         /// <returns></returns>
-        public abstract List<IPicker> GetPickerList();
+        public List<IPicker> GetPickerList()
+        {
+            List<Type> list = LotteryHelper.GetTypeList(this._lotteryType);
+            List<IPicker> pickerList = new List<IPicker>();
+            foreach (Type type in list)
+            {
+                try
+                {
+                    IPicker picker = Activator.CreateInstance(type) as IPicker;
+                    if (picker != null && picker.IsValid)
+                    {
+                        pickerList.Add(picker);
+                    }
+
+                }
+                catch (Exception ex)
+                {
+
+                }
+            }
+
+            return pickerList;
+        }
 
         /// <summary>
         /// 执行抓取

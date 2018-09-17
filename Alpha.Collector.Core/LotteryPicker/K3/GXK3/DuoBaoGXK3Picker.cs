@@ -48,7 +48,7 @@ namespace Alpha.Collector.Core
         {
             get
             {
-                return base.LotteryList.Contains(LotteryEnum.AHK3) && base.DataSourceList.Contains(DataSourceEnum._168);
+                return base.LotteryList.Contains(LotteryEnum.GXK3) && base.DataSourceList.Contains(DataSourceEnum.DuoBao);
             }
         }
     }

@@ -1,6 +1,4 @@
-﻿using Alpha.Collector.Utils;
-using System;
-using System.Collections.Generic;
+﻿using Alpha.Collector.Model;
 
 namespace Alpha.Collector.Core
 {
@@ -9,60 +7,6 @@ namespace Alpha.Collector.Core
     /// </summary>
     public class FC3DPickerManager : PickerManager
     {
-        /// <summary>
-        /// 获取采集器列表
-        /// </summary>
-        /// <returns></returns>
-        public override List<IPicker> GetPickerList()
-        {
-            List<Type> list = ReflectionHelper.GetClasses<IFC3DPicker>();
-            List<IPicker> pickerList = new List<IPicker>();
-            foreach (Type type in list)
-            {
-                try
-                {
-                    IFC3DPicker picker = Activator.CreateInstance(type) as IFC3DPicker;
-                    if (picker != null && picker.IsValid)
-                    {
-                        pickerList.Add(picker);
-                    }
-
-                }
-                catch (Exception ex)
-                {
-
-                }
-            }
-
-            return pickerList;
-        }
-
-        /// <summary>
-        /// 获取采集器
-        /// </summary>
-        /// <param name="dataSource"></param>
-        /// <returns></returns>
-        public override IPicker GetPicker(string dataSource)
-        {
-            List<Type> list = ReflectionHelper.GetClasses<IFC3DPicker>();
-            foreach (Type type in list)
-            {
-                try
-                {
-                    IFC3DPicker picker = Activator.CreateInstance(type) as IFC3DPicker;
-                    if (picker != null && type.Name.ToLower().Contains(dataSource.ToLower()))
-                    {
-                        return picker;
-                    }
-
-                }
-                catch (Exception ex)
-                {
-                    return null;
-                }
-            }
-
-            return null;
-        }
+        public FC3DPickerManager() : base(LotteryEnum.FC3D) { }
     }
 }

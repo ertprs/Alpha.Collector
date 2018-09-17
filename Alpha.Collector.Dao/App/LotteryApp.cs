@@ -46,7 +46,7 @@ namespace Alpha.Collector.Dao
         /// <returns></returns>
         public static int UpdateStatus(string id, int status)
         {
-            string sql = $"update lottery set status = {status} where id in ({id})";
+            string sql = $"update lottery set status = {status}, update_time='{DateTime.Now}', update_timestamp={DateTime.Now.ToTimestamp()} where id in ({id})";
             return MysqlHelper.Execute(sql);
         }
 

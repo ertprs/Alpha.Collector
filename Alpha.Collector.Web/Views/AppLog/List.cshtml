@@ -12,13 +12,13 @@
             <div class="caption"><i class="icon-user"></i> 日志列表</div>
         </div>
     </div>
-    @using (Html.PageView("List", "AppLog", "UserInfoForm", "UserInfoContainer", "List_Partial", Model))
+    @using (Html.PageView("List", "AppLog", "AppLogForm", "AppLogContainer", "List_Partial", Model))
     {
         <div class="panel panel-default">
             <div class="panel-heading ">
                 <div class="form-inline">
                     <label>彩种：</label>
-                    <select class="form-control input-small select2me" id="Params_LotteryCode" name="Params.LotteryCode" data-placeholder="全部">
+                    <select class="form-control input-small select2me" id="Params_LotteryCode" name="Params.LotteryCode" data-placeholder="全部" onclick="$('#AppLogForm').submit();">
                         <option value=""></option>
                         @foreach (var item in ViewBag.LotteryList as List<SelectListItem>)
                         {
@@ -26,7 +26,7 @@
                         }
                     </select>
                     <label>数据源：</label>
-                    <select class="form-control input-small select2me" id="Params_DataSource" name="Params.DataSource" data-placeholder="全部">
+                    <select class="form-control input-small select2me" id="Params_DataSource" name="Params.DataSource" data-placeholder="全部" onclick="$('#AppLogForm').submit();">
                         <option value=""></option>
                         @foreach (var item in ViewBag.DataSourceList as List<SelectListItem>)
                         {
@@ -49,10 +49,10 @@
 @section footer{
     <script type="text/javascript">
         $(function () {
-            $("#showDetail").live("click", function () {
-                var message = $(this).attr("itemName");
+            $(".showDetail").live("click", function () {
+                var id = $(this).attr("itemId");
                 App.LoadModal("#DetailsDiv", "/AppLog/AppLogDetail",
-                    { message: message });
+                    { id: id });
             });
         });
     </script>

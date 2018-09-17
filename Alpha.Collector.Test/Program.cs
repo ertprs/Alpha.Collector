@@ -18,16 +18,16 @@ namespace Alpha.Collector.Test
     {
         static void Main(string[] args)
         {
-            List<IPicker> list = LotteryHelper.GetPickerList(LotteryEnum.JSK3);
+            //List<IPicker> list = new AHK3PickerManager().GetPickerList();
 
-            MainWork work = new MainWork();
-            work.Run();
+            //MainWork work = new MainWork();
+            //work.Run();
 
-            //List<OpenResult> resultList;
-            //PickerManager manager = new JSK3PickerManager();
+            List<OpenResult> resultList;
+            PickerManager manager = new FC3DPickerManager();
             //List<IPicker> pickerList = manager.GetPickerList();
-            //IPicker picker = manager.GetPicker(DataSourceEnum.DuoBao);
-            //resultList = picker.Run();
+            IPicker picker = manager.GetPicker(DataSourceEnum._168);
+            resultList = picker.Run();
 
             //int result = OpenResultApp.Insert(resultList);
 

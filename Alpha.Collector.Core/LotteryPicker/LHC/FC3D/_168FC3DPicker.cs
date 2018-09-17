@@ -31,7 +31,7 @@ namespace Alpha.Collector.Core
                             create_time = DateTime.Now,
                             open_time = o.open_time,
                             lottery_code = o.lottery_code,
-                            issue_number = Convert.ToInt64(DateTime.Parse(o.issue_number.ToString()).ToString("yyyyMMdd") + o.issue_number.ToString().Replace(DateTime.Parse(o.issue_number.ToString()).ToString("yyyy"), "")),
+                            issue_number = Convert.ToInt64(o.open_time.ToString("yyyyMMdd") + o.issue_number.ToString().Replace(o.open_time.ToString("yyyy"), "")),
                             open_data = o.open_data,
                             data_source = DataSourceEnum._168
                         }).OrderBy(o => o.issue_number).ToList();

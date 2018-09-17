@@ -40,8 +40,7 @@ namespace Alpha.Collector.Dao
         /// <returns></returns>
         public static int UpdateStatus(int id, int status)
         {
-            string sql = "update data_source set status = {0} where id = {1}";
-            sql = string.Format(sql, status, id);
+            string sql = $"update data_source set status = {status}, update_time='{DateTime.Now}', update_timestamp={DateTime.Now.ToTimestamp()} where id = {id}";
             return MysqlHelper.Execute(sql);
         }
 

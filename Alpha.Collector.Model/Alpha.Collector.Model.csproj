@@ -49,6 +49,7 @@
     <Compile Include="DSResponse\BiFaResponse.cs" />
     <Compile Include="DSResponse\DuoBaoReponse.cs" />
     <Compile Include="DSResponse\RoboResponse.cs" />
+    <Compile Include="Enums\ApiKey.cs" />
     <Compile Include="Enums\CacheKey.cs" />
     <Compile Include="Exts\ModelExts.cs" />
     <Compile Include="Exts\ModelFunction.cs" />
@@ -63,6 +64,7 @@
     <Compile Include="DSResponse\_168Response.cs" />
     <Compile Include="Web\AjaxResult.cs" />
     <Compile Include="Web\PickCount.cs" />
+    <Compile Include="Web\ApiRequestParams.cs" />
     <Compile Include="Web\ServiceResult.cs" />
     <Compile Include="Web\ServiceResultExt.cs" />
   </ItemGroup>

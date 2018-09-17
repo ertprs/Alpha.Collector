@@ -23,7 +23,17 @@ namespace Alpha.Collector.Core
             try
             {
                 _168Picker picker = new _168Picker(URL, LotteryEnum.GX11X5);
-                return picker.Pick();
+                List<OpenResult> dataList = picker.Pick();
+                return (from o in dataList
+                        select new OpenResult
+                        {
+                            create_time = DateTime.Now,
+                            open_time = o.open_time,
+                            lottery_code = o.lottery_code,
+                            issue_number = Convert.ToInt64("20" + o.issue_number),
+                            open_data = o.open_data,
+                            data_source = DataSourceEnum._168
+                        }).OrderBy(o => o.issue_number).ToList();
             }
             catch (Exception ex)
             {

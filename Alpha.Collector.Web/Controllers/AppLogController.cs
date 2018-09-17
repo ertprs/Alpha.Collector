@@ -80,9 +80,11 @@ namespace Alpha.Collector.Web.Controllers
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public ActionResult AppLogDetail(string message)
+        public ActionResult AppLogDetail(string id)
         {
-            ViewBag.Message = message;
+            AppLog appLog = AppLogApp.GetLogById(id);
+
+            ViewBag.Message = appLog == null ? "" : appLog.log_message;
             return View();
         }
     }
